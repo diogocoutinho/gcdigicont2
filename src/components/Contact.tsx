@@ -231,8 +231,8 @@ export default function Contact() {
               disabled={isSubmitting}
               className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                 isSubmitting
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-primary text-white hover:bg-primary/90 focus:ring-primary"
+                  ? "bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed"
+                  : "bg-secondary text-white hover:bg-secondary/90 focus:ring-secondary"
               }`}
             >
               {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
