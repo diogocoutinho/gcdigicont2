@@ -45,6 +45,7 @@ export default function Contact() {
         setFormData({ name: "", email: "", phone: "", message: "" });
       }
     } catch (error) {
+      console.error(error);
       setSubmitStatus({
         type: "error",
         message:
