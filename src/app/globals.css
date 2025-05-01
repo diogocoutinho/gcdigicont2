@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --background: #0e2b3a;
+  --foreground: #ffffff;
+  --primary: #ffffff;
+  --secondary: #c79d4b;
+  --light: #34495e;
+  --neutral: #eaeaea;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0e2b3a;
+  --foreground: #ffffff;
+  --primary: #ffffff;
+  --secondary: #c79d4b;
+  --light: #34495e;
+  --neutral: #eaeaea;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #0e2b3a;
+    --primary: #0e2b3a;
+    --secondary: #c79d4b;
+    --light: #eaeaea;
+    --neutral: #34495e;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-light: var(--light);
+  --color-neutral: var(--neutral);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.text-light {
+  color: var(--light);
+}
+
+.text-neutral {
+  color: var(--neutral);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-light {
+  background-color: var(--light);
+}
+
+.bg-neutral {
+  background-color: var(--neutral);
+}
+
+.border-primary {
+  border-color: var(--primary);
+}
+
+.border-secondary {
+  border-color: var(--secondary);
+}
+
+.border-light {
+  border-color: var(--light);
+}
+
+.border-neutral {
+  border-color: var(--neutral);
 }
