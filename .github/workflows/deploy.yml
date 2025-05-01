@@ -33,6 +33,7 @@ jobs:
           host: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USERNAME }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT }}
           source: "out/*"
           target: ${{ secrets.HOSTINGER_DEPLOY_PATH }}
           strip_components: 1
