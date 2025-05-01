@@ -31,7 +31,7 @@ export default function Contact() {
     <section id="contato" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-light mb-4">
             Entre em Contato
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -45,11 +45,11 @@ export default function Contact() {
           <div className="space-y-8">
             <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
               <div className="flex items-start space-x-4">
-                <div className="bg-primary/10 p-3 rounded-lg text-primary">
+                <div className="bg-primary/10 p-3 rounded-lg text-light">
                   <FaEnvelope className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-primary">E-mail</h3>
+                  <h3 className="text-lg font-semibold text-light">E-mail</h3>
                   <p className="text-gray-600">contato@gcdigicont.com.br</p>
                 </div>
               </div>
@@ -57,11 +57,11 @@ export default function Contact() {
 
             <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
               <div className="flex items-start space-x-4">
-                <div className="bg-primary/10 p-3 rounded-lg text-primary">
+                <div className="bg-primary/10 p-3 rounded-lg text-light">
                   <FaWhatsapp className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-primary">
+                  <h3 className="text-lg font-semibold text-light">
                     WhatsApp 1
                   </h3>
                   <p className="text-gray-600">+55 (31) 99360-2476</p>
@@ -71,11 +71,11 @@ export default function Contact() {
 
             <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
               <div className="flex items-start space-x-4">
-                <div className="bg-primary/10 p-3 rounded-lg text-primary">
+                <div className="bg-primary/10 p-3 rounded-lg text-light">
                   <FaWhatsapp className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-primary">
+                  <h3 className="text-lg font-semibold text-light">
                     WhatsApp 2
                   </h3>
                   <p className="text-gray-600">+55 (31) 98752-9716</p>

@@ -9,13 +9,13 @@ export default function PrivacyPolicy() {
       <Header />
       <main className="pt-24 pb-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-primary mb-8">
+          <h1 className="text-3xl font-bold text-light mb-8">
             Política de Privacidade
           </h1>
 
           <div className="prose max-w-none">
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-primary mb-4">
+              <h2 className="text-2xl font-semibold text-light mb-4">
                 1. Introdução
               </h2>
               <p className="text-gray-700 mb-4">
@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-primary mb-4">
+              <h2 className="text-2xl font-semibold text-light mb-4">
                 2. Informações que Coletamos
               </h2>
               <p className="text-gray-700 mb-4">
@@ -45,7 +45,7 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-primary mb-4">
+              <h2 className="text-2xl font-semibold text-light mb-4">
                 3. Como Usamos suas Informações
               </h2>
               <p className="text-gray-700 mb-4">
@@ -60,7 +60,7 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-primary mb-4">
+              <h2 className="text-2xl font-semibold text-light mb-4">
                 4. Proteção de Dados
               </h2>
               <p className="text-gray-700 mb-4">
@@ -71,7 +71,7 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-primary mb-4">
+              <h2 className="text-2xl font-semibold text-light mb-4">
                 5. Seus Direitos
               </h2>
               <p className="text-gray-700 mb-4">Você tem o direito de:</p>
@@ -84,7 +84,7 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-primary mb-4">
+              <h2 className="text-2xl font-semibold text-light mb-4">
                 6. Contato
               </h2>
               <p className="text-gray-700 mb-4">
@@ -95,7 +95,7 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-primary mb-4">
+              <h2 className="text-2xl font-semibold text-light mb-4">
                 7. Alterações na Política
               </h2>
               <p className="text-gray-700 mb-4">

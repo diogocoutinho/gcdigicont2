@@ -46,7 +46,7 @@ export default function Services() {
     <section id="servicos" className="py-16 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-light mb-4">
             Nossos Serviços
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -64,7 +64,7 @@ export default function Services() {
               <div className="text-secondary mb-4">
                 <service.icon className="w-12 h-12" />
               </div>
-              <h3 className="text-xl font-bold text-primary mb-4">
+              <h3 className="text-xl font-bold text-light mb-4">
                 {service.title}
               </h3>
               <p className="text-gray-600">{service.description}</p>
@@ -74,7 +74,7 @@ export default function Services() {
 
         <div className="mt-16 text-center">
           <div className="inline-flex items-center p-6 bg-white rounded-lg shadow-lg">
-            <span className="text-lg font-medium text-primary mr-4">
+            <span className="text-lg font-medium text-light mr-4">
               Atendimento exclusivo e personalizado
             </span>
             <span className="text-secondary">

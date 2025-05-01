@@ -68,7 +68,7 @@ export default function Plans() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="text-4xl sm:text-5xl font-bold text-primary mb-6">
+          <h2 className="text-4xl sm:text-5xl font-bold text-light mb-6">
             Nossos Planos
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -92,7 +92,7 @@ export default function Plans() {
               )}
               <div className="p-10">
                 <div className="mb-8">
-                  <h3 className="text-3xl font-bold text-primary mb-3">
+                  <h3 className="text-3xl font-bold text-light mb-3">
                     {plan.name}
                   </h3>
                   <p className="text-gray-600 text-lg">{plan.description}</p>
@@ -115,7 +115,7 @@ export default function Plans() {
                     {plan.features.map((feature) => (
                       <div key={feature} className="flex items-start space-x-4">
                         <div className="bg-primary/10 p-1.5 rounded-full">
-                          <FaCheck className="w-4 h-4 text-primary" />
+                          <FaCheck className="w-4 h-4 text-light" />
                         </div>
                         <span className="text-gray-600 text-lg">{feature}</span>
                       </div>

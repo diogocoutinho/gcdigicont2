@@ -56,36 +56,37 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-8">
             <a
-              href="#servicos"
-              onClick={(e) => handleNavigation(e, "servicos")}
-              className="text-primary hover:text-secondary transition-colors cursor-pointer"
-            >
-              Serviços
-            </a>
-            <a
               href="#sobre"
               onClick={(e) => handleNavigation(e, "sobre")}
-              className="text-primary hover:text-secondary transition-colors cursor-pointer"
+              className="text-light hover:text-secondary transition-colors cursor-pointer"
             >
               Sobre Nós
             </a>
+            <a
+              href="#servicos"
+              onClick={(e) => handleNavigation(e, "servicos")}
+              className="text-light hover:text-secondary transition-colors cursor-pointer"
+            >
+              Serviços
+            </a>
+
             {/* <a
               href="#planos"
               onClick={(e) => handleNavigation(e, "planos")}
-              className="text-primary hover:text-secondary transition-colors cursor-pointer"
+              className="text-light hover:text-secondary transition-colors cursor-pointer"
             >
               Planos
             </a> */}
             <a
               href="#contato"
               onClick={(e) => handleNavigation(e, "contato")}
-              className="text-primary hover:text-secondary transition-colors cursor-pointer"
+              className="text-light hover:text-secondary transition-colors cursor-pointer"
             >
               Contato
             </a>
             <Link
               href="https://econtador.alterdata.com.br/"
-              className="btn-primary"
+              className="text-light hover:text-secondary transition-colors cursor-pointer"
               target="_blank"
             >
               Área do Cliente
@@ -96,7 +97,7 @@ export default function Header() {
           <div className="flex items-center sm:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-primary hover:text-secondary"
+              className="inline-flex items-center justify-center p-2 rounded-md text-light hover:text-secondary"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <span className="sr-only">Abrir menu principal</span>
@@ -138,29 +139,29 @@ export default function Header() {
       <div className={`sm:hidden ${isMenuOpen ? "block" : "hidden"}`}>
         <div className="pt-2 pb-3 space-y-1">
           <a
-            href="#servicos"
-            onClick={(e) => handleNavigation(e, "servicos")}
-            className="block px-3 py-2 text-primary hover:text-secondary cursor-pointer"
-          >
-            Serviços
-          </a>
-          <a
             href="#sobre"
             onClick={(e) => handleNavigation(e, "sobre")}
-            className="block px-3 py-2 text-primary hover:text-secondary cursor-pointer"
+            className="block px-3 py-2 text-light hover:text-secondary cursor-pointer"
           >
             Sobre Nós
           </a>
           <a
+            href="#servicos"
+            onClick={(e) => handleNavigation(e, "servicos")}
+            className="block px-3 py-2 text-light hover:text-secondary cursor-pointer"
+          >
+            Serviços
+          </a>
+          <a
             href="#contato"
             onClick={(e) => handleNavigation(e, "contato")}
-            className="block px-3 py-2 text-primary hover:text-secondary cursor-pointer"
+            className="block px-3 py-2 text-light hover:text-secondary cursor-pointer"
           >
             Contato
           </a>
           <Link
             href="https://econtador.alterdata.com.br/"
-            className="block px-3 py-2 text-primary hover:text-secondary cursor-pointer"
+            className="block px-3 py-2 text-light hover:text-secondary cursor-pointer"
             onClick={() => setIsMenuOpen(false)}
             target="_blank"
           >

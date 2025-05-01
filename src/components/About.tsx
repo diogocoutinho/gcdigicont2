@@ -16,7 +16,7 @@ export default function About() {
             />
           </div>
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-light mb-6">
               Quem Somos
             </h2>
             <p className="text-lg text-gray-600 mb-8">
@@ -26,7 +26,7 @@ export default function About() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="text-xl font-semibold text-primary mb-2">
+                <h3 className="text-xl font-semibold text-light mb-2">
                   Missão
                 </h3>
                 <p className="text-gray-600">
@@ -35,9 +35,7 @@ export default function About() {
                 </p>
               </div>
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="text-xl font-semibold text-primary mb-2">
-                  Visão
-                </h3>
+                <h3 className="text-xl font-semibold text-light mb-2">Visão</h3>
                 <p className="text-gray-600">
                   Ser referência em contabilidade digital, reconhecida pela
                   excelência no atendimento e inovação em soluções contábeis.

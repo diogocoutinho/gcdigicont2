@@ -27,7 +27,7 @@ export default function Hero() {
           className="object-cover scale-105"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/85 to-primary/75" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/85 to-background/75" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
