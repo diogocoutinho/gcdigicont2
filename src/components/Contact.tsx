@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -11,11 +12,47 @@ export default function Contact() {
     message: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle the form submission
-    // For now, we'll just console.log the data
-    console.log(formData);
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const result = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          from_phone: formData.phone,
+          message: formData.message,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      if (result.status === 200) {
+        setSubmitStatus({
+          type: "success",
+          message:
+            "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+        });
+        setFormData({ name: "", email: "", phone: "", message: "" });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message:
+          "Erro ao enviar mensagem. Por favor, tente novamente mais tarde.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -89,6 +126,18 @@ export default function Contact() {
             onSubmit={handleSubmit}
             className="bg-white p-8 rounded-xl shadow-sm space-y-6"
           >
+            {submitStatus.type && (
+              <div
+                className={`p-4 rounded-lg ${
+                  submitStatus.type === "success"
+                    ? "bg-green-50 text-green-800"
+                    : "bg-red-50 text-red-800"
+                }`}
+              >
+                {submitStatus.message}
+              </div>
+            )}
+
             <div className="space-y-2">
               <label
                 htmlFor="name"
@@ -106,6 +155,7 @@ export default function Contact() {
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 bg-gray-50/50 placeholder-gray-400 text-gray-700"
                   placeholder="Digite seu nome completo"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
@@ -127,6 +177,7 @@ export default function Contact() {
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 bg-gray-50/50 placeholder-gray-400 text-gray-700"
                   placeholder="Digite seu e-mail"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
@@ -148,6 +199,7 @@ export default function Contact() {
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 bg-gray-50/50 placeholder-gray-400 text-gray-700"
                   placeholder="Digite seu telefone"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
@@ -169,15 +221,21 @@ export default function Contact() {
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 bg-gray-50/50 placeholder-gray-400 text-gray-700 resize-none"
                   placeholder="Digite sua mensagem"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary/90 transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              disabled={isSubmitting}
+              className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                isSubmitting
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-primary text-white hover:bg-primary/90 focus:ring-primary"
+              }`}
             >
-              Enviar Mensagem
+              {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
             </button>
           </form>
         </div>
