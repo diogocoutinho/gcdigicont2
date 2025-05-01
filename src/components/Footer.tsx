@@ -127,7 +127,7 @@ export default function Footer() {
               © {new Date().getFullYear()} GCDIGICONT. Todos os direitos
               reservados.
             </p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
+            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 mt-4 md:mt-0">
               <Link
                 href="/privacidade"
                 className="text-gray-100 hover:text-secondary text-sm"
@@ -141,6 +141,28 @@ export default function Footer() {
                 Termos de Uso
               </Link>
             </div>
+          </div>
+          <div className="mt-4 text-center">
+            <p className="text-gray-100 text-xs">
+              Desenvolvido por{" "}
+              <a
+                href="https://easydevsolucoes.github.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-secondary hover:text-secondary/80"
+              >
+                EasyDev Soluções
+              </a>{" "}
+              através de{" "}
+              <a
+                href="https://diogocoutinho.github.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-secondary hover:text-secondary/80"
+              >
+                Diogo Coutinho
+              </a>
+            </p>
           </div>
         </div>
       </div>
