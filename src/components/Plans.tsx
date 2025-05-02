@@ -66,20 +66,6 @@ const categories: Category[] = [
     ],
   },
   {
-    name: "Pessoa Física",
-    features: [
-      {
-        label: "Serviços Pessoa Física",
-        values: [
-          "Consultar tabela de Serviços abaixo",
-          "Consultar tabela de Serviços abaixo",
-          "Consultar tabela de Serviços abaixo",
-          "Consultar tabela de Serviços abaixo",
-        ],
-      },
-    ],
-  },
-  {
     name: "Faturamento",
     features: [
       {
@@ -91,6 +77,20 @@ const categories: Category[] = [
           "Ideal até R$ 50.000,00 mês*",
         ],
         note: "* valores acima consulte um consultor pelos canais de Contato",
+      },
+    ],
+  },
+  {
+    name: "Pessoa Física",
+    features: [
+      {
+        label: "Serviços Pessoa Física",
+        values: [
+          "Consultar tabela de Serviços abaixo",
+          "Consultar tabela de Serviços abaixo",
+          "Consultar tabela de Serviços abaixo",
+          "Consultar tabela de Serviços abaixo",
+        ],
       },
     ],
   },
@@ -153,7 +153,7 @@ function FeatureLabelWithNote({
         >
           <FaInfoCircle className="inline-block w-4 h-4 align-middle" />
           {show && (
-            <span className="absolute left-6 top-1/2 z-20 -translate-y-1/2 bg-gray-900 text-white text-sm rounded px-3 py-2 shadow-lg max-w-xs whitespace-normal break-words min-w-80 ">
+            <span className="absolute left-6 top-1/2 z-50 -translate-y-1/2 bg-gray-900 text-white text-sm rounded px-3 py-2 shadow-lg max-w-xs whitespace-normal break-words min-w-80">
               {note}
             </span>
           )}
