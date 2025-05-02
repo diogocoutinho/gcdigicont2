@@ -1,163 +1,265 @@
 "use client";
 
-import { FaCheck, FaTimes } from "react-icons/fa";
+import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
+import { useState } from "react";
 
-interface Plan {
-  name: string;
-  price: number;
-  description: string;
-  features: string[];
-  notIncluded: string[];
-  popular?: boolean;
-}
-
-const plans: Plan[] = [
+const plans = [
   {
-    name: "Básico",
-    price: 299,
-    description: "Ideal para pequenos negócios que estão começando",
-    features: [
-      "Declaração de Imposto de Renda",
-      "Escrituração Contábil",
-      "Emissão de Notas Fiscais",
-      "Relatórios Mensais",
-      "Suporte por E-mail",
-    ],
-    notIncluded: [
-      "Consultoria Personalizada",
-      "Gestão de Folha de Pagamento",
-      "Auditoria Contábil",
-    ],
+    name: "MEI",
+    price: 80,
+    description: "Micro Empreendedor Individual",
   },
   {
-    name: "Profissional",
-    price: 599,
-    description: "Perfeito para empresas em crescimento",
-    popular: true,
-    features: [
-      "Todas as funcionalidades do Plano Básico",
-      "Consultoria Personalizada",
-      "Gestão de Folha de Pagamento",
-      "Relatórios Personalizados",
-      "Suporte Prioritário",
-      "Treinamentos Online",
-    ],
-    notIncluded: ["Auditoria Contábil", "Consultoria Jurídica"],
+    name: "Simples Nacional",
+    price: 120,
+    description: "Empresas do Simples Nacional",
   },
   {
-    name: "Empresarial",
-    price: 999,
-    description: "Solução completa para empresas estabelecidas",
-    features: [
-      "Todas as funcionalidades do Plano Profissional",
-      "Auditoria Contábil",
-      "Consultoria Jurídica",
-      "Gestão de Patrimônio",
-      "Suporte 24/7",
-      "Treinamentos Presenciais",
-    ],
-    notIncluded: [],
+    name: "Lucro Presumido",
+    price: 210,
+    description: "Empresas de Lucro Presumido",
+  },
+  {
+    name: "Construção Civil",
+    price: 210,
+    description: "Empresas da Construção Civil",
   },
 ];
 
+const categories = [
+  {
+    name: "Processos Iniciais",
+    features: [
+      {
+        label:
+          "Contabilidade Completa: Todas as obrigações Contábeis e Legais com a Receita Federal, Estadual e Municipal",
+        values: [true, true, true, true],
+      },
+      {
+        label: "Processo de Abertura Grátis",
+        values: [true, true, true, true],
+      },
+      {
+        label: "Serviços Pessoa Física: Carnê Leão; Imposto de renda",
+        values: [
+          "Consultar tabela de Serviços abaixo",
+          "Consultar tabela de Serviços abaixo",
+          "Consultar tabela de Serviços abaixo",
+          "Consultar tabela de Serviços abaixo",
+        ],
+      },
+      {
+        label: "Folha de Pagamento",
+        values: [true, true, true, true],
+      },
+      {
+        label: "Pró Labore dos Sócios / Folha de Pagamento",
+        values: ["", "Até 2*", "Até 2*", "Até 2*"],
+        note: "2 Sócios ou 1 Sócio e 1 Funcionário - Acima disso será cobrado R$ 29,90 por integrante extra",
+      },
+    ],
+  },
+  {
+    name: "Pessoa Física",
+    features: [
+      {
+        label: "Serviços Pessoa Física: Carnê Leão; Imposto de renda",
+        values: [
+          "Consultar tabela de Serviços abaixo",
+          "Consultar tabela de Serviços abaixo",
+          "Consultar tabela de Serviços abaixo",
+          "Consultar tabela de Serviços abaixo",
+        ],
+      },
+    ],
+  },
+];
+const additionalServices = [
+  { name: "IRPF (Imposto de renda pessoa física)", price: 229 },
+  { name: "Alteração Contratual (EI e LTDA)", price: "1250 + taxas" },
+  { name: "Alteração de Natureza Jurídica", price: 1339 },
+  { name: "Preenchimento de Alvará", price: 399 },
+  { name: "Baixa MEI", price: 209 },
+  {
+    name: "Taxa de Reprocessamento (em qualquer alteração ou constituição)",
+    price: 299.9,
+  },
+  { name: "Ativação de Inscrição Estadual", price: 209 },
+  { name: "Baixa empresa Lucro Presumido", price: 1259 },
+  { name: "Baixa empresa Simples Nacional", price: 1259 },
+  { name: "Declaração de Faturamento", price: 49 },
+  { name: "Autenticação de Livros na Junta", price: 349 },
+  { name: "Reemissão de Guias (impostos e outros)", price: 49.9 },
+  { name: "Formulários Diversos (bancos, fornecedores, etc)", price: 69 },
+  { name: "Parcelamento de Impostos", price: 209 },
+  { name: "Rescisão e Admissão de Funcionários", price: 109 },
+  { name: "Verificação de Pendências", price: 209 },
+  { name: "Migração de MEI para ME", price: 1399 },
+  { name: "Retificação (DAS)", price: 69.9 },
+  { name: "Retificação de impostos", price: 79.9 },
+  { name: "Registro de marca", price: 997 },
+  { name: "LTCAT", price: 699.9 },
+  { name: "Certificado digital PF", price: 150 },
+  { name: "Certificado digital PJ", price: 250 },
+];
+
+function renderCell(value: boolean | string | undefined) {
+  if (value === true)
+    return <FaCheck className="mx-auto text-secondary w-5 h-5" />;
+  if (value === false)
+    return <FaTimes className="mx-auto text-gray-300 w-5 h-5" />;
+  return (
+    <span className="block text-center text-sm text-gray-700">{value}</span>
+  );
+}
+
+function FeatureLabelWithNote({
+  label,
+  note,
+}: {
+  label: string;
+  note?: string;
+}) {
+  const [show, setShow] = useState(false);
+  return (
+    <span className="flex items-center gap-1 relative">
+      {label}
+      {note && (
+        <span
+          className="ml-1 text-secondary cursor-pointer relative"
+          onMouseEnter={() => setShow(true)}
+          onMouseLeave={() => setShow(false)}
+        >
+          <FaInfoCircle className="inline-block w-4 h-4 align-middle" />
+          {show && (
+            <span className="absolute left-6 top-1/2 z-20 -translate-y-1/2 bg-gray-900 text-white text-xs rounded px-3 py-2 shadow-lg whitespace-nowrap">
+              {note}
+            </span>
+          )}
+        </span>
+      )}
+    </span>
+  );
+}
+
 export default function Plans() {
+  const [showAdditional, setShowAdditional] = useState(false);
   return (
     <section
       id="planos"
       className="py-24 bg-gradient-to-b from-gray-50 to-white"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl sm:text-5xl font-bold text-light mb-6">
-            Nossos Planos
+      <div className="container mx-auto px-2 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-bold text-light mb-4">
+            Conheça nossos planos.
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Escolha o plano ideal para o seu negócio e comece a transformar sua
-            contabilidade hoje mesmo.
-          </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 ${
-                plan.popular ? "border-2 border-primary" : ""
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
-                  Mais Popular
-                </div>
-              )}
-              <div className="p-10">
-                <div className="mb-8">
-                  <h3 className="text-3xl font-bold text-light mb-3">
-                    {plan.name}
-                  </h3>
-                  <p className="text-gray-600 text-lg">{plan.description}</p>
-                </div>
-
-                <div className="mb-10">
-                  <div className="flex items-baseline">
-                    <span className="text-5xl font-bold text-gray-900">
-                      R$ {plan.price}
-                    </span>
-                    <span className="text-gray-500 text-lg ml-2">/mês</span>
-                  </div>
-                </div>
-
-                <div className="space-y-6 mb-10">
-                  <h4 className="text-lg font-semibold text-gray-900">
-                    Inclui:
-                  </h4>
-                  <div className="space-y-4">
-                    {plan.features.map((feature) => (
-                      <div key={feature} className="flex items-start space-x-4">
-                        <div className="bg-primary/10 p-1.5 rounded-full">
-                          <FaCheck className="w-4 h-4 text-light" />
-                        </div>
-                        <span className="text-gray-600 text-lg">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {plan.notIncluded.length > 0 && (
-                  <div className="space-y-6 mb-10">
-                    <h4 className="text-lg font-semibold text-gray-900">
-                      Não inclui:
-                    </h4>
-                    <div className="space-y-4">
-                      {plan.notIncluded.map((feature) => (
-                        <div
-                          key={feature}
-                          className="flex items-start space-x-4"
-                        >
-                          <div className="bg-gray-100 p-1.5 rounded-full">
-                            <FaTimes className="w-4 h-4 text-gray-400" />
-                          </div>
-                          <span className="text-gray-400 text-lg">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
+        <div className="overflow-x-auto">
+          <table className="min-w-[700px] w-full bg-white rounded-2xl shadow-lg">
+            <thead>
+              <tr>
+                <th className="w-64"></th>
+                {plans.map((plan) => (
+                  <th
+                    key={plan.name}
+                    className="text-center px-6 py-6 align-bottom border-b-2 border-gray-100"
+                  >
+                    <div className="text-2xl font-bold text-light mb-1">
+                      {plan.name}
                     </div>
-                  </div>
-                )}
-
-                <button
-                  className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                    plan.popular
-                      ? "bg-primary text-white hover:bg-primary/90 focus:ring-primary shadow-lg hover:shadow-primary/20"
-                      : "bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-300"
-                  }`}
-                >
-                  Contratar Plano
-                </button>
-              </div>
+                    <div className="text-sm text-gray-500 mb-2">
+                      {plan.description}
+                    </div>
+                    <div className="text-3xl font-bold text-secondary mb-1">
+                      R$ {plan.price}
+                    </div>
+                    <div className="text-xs text-gray-400 mb-4">/mês</div>
+                    <button className="w-full py-2 px-4 rounded-lg font-semibold text-base transition-all duration-200 bg-secondary text-white hover:bg-secondary/90">
+                      Contratar
+                    </button>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {categories.map((cat) => (
+                <>
+                  <tr key={cat.name + "-cat"}>
+                    <td
+                      colSpan={plans.length + 1}
+                      className="bg-gray-50 text-left px-6 py-3 font-bold text-light text-base border-t border-b border-gray-100"
+                    >
+                      {cat.name}
+                    </td>
+                  </tr>
+                  {cat.features.map((feature, idx) => (
+                    <tr
+                      key={feature.label}
+                      className="border-b border-gray-100"
+                    >
+                      <td className="text-left px-6 py-3 text-gray-700 text-sm font-medium">
+                        <FeatureLabelWithNote
+                          label={feature.label}
+                          note={feature.note}
+                        />
+                      </td>
+                      {feature.values.map((value, i) => (
+                        <td key={i} className="px-6 py-3">
+                          {renderCell(value)}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {/* Serviços adicionais colapsável */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setShowAdditional(!showAdditional)}
+            className="inline-flex items-center text-2xl font-bold text-light mb-4 focus:outline-none"
+          >
+            Serviços Adicionais
+            <span className="ml-2 text-light">
+              {showAdditional ? "−" : "+"}
+            </span>
+          </button>
+          {showAdditional && (
+            <div className="overflow-x-auto mt-4 max-w-3xl mx-auto">
+              <table className="min-w-full bg-white rounded-xl overflow-hidden">
+                <thead className="bg-gray-100">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase">
+                      Serviço
+                    </th>
+                    <th className="px-6 py-3 text-right text-sm font-medium text-gray-500 uppercase">
+                      Preço (R$)
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {additionalServices.map((service, index) => (
+                    <tr
+                      key={service.name}
+                      className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                    >
+                      <td className="px-6 py-4 text-sm text-gray-700">
+                        {service.name}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-900 text-right">
+                        {typeof service.price === "number"
+                          ? `R$ ${service.price.toFixed(2)}`
+                          : service.price}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>

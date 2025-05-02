@@ -69,14 +69,20 @@ export default function Header() {
             >
               Serviços
             </a>
-
-            {/* <a
+            <a
               href="#planos"
               onClick={(e) => handleNavigation(e, "planos")}
               className="text-light hover:text-secondary transition-colors cursor-pointer"
             >
               Planos
-            </a> */}
+            </a>
+            <a
+              href="#parceiros"
+              onClick={(e) => handleNavigation(e, "parceiros")}
+              className="text-light hover:text-secondary transition-colors cursor-pointer"
+            >
+              Parceiros
+            </a>
             <a
               href="#contato"
               onClick={(e) => handleNavigation(e, "contato")}
@@ -86,7 +92,7 @@ export default function Header() {
             </a>
             <Link
               href="https://econtador.alterdata.com.br/"
-              className="text-light hover:text-secondary transition-colors cursor-pointer"
+              className="text-primary text-center hover:text-secondary transition-colors cursor-pointer bg-secondary text-white hover:bg-secondary/90 focus:ring-secondary shadow-lg py-3 px-6 rounded-xl font-semibold text-sm transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2"
               target="_blank"
             >
               Área do Cliente
@@ -153,6 +159,20 @@ export default function Header() {
             Serviços
           </a>
           <a
+            href="#planos"
+            onClick={(e) => handleNavigation(e, "planos")}
+            className="block px-3 py-2 text-light hover:text-secondary cursor-pointer"
+          >
+            Planos
+          </a>
+          <a
+            href="#parceiros"
+            onClick={(e) => handleNavigation(e, "parceiros")}
+            className="block px-3 py-2 text-light hover:text-secondary cursor-pointer"
+          >
+            Parceiros
+          </a>
+          <a
             href="#contato"
             onClick={(e) => handleNavigation(e, "contato")}
             className="block px-3 py-2 text-light hover:text-secondary cursor-pointer"
@@ -161,7 +181,7 @@ export default function Header() {
           </a>
           <Link
             href="https://econtador.alterdata.com.br/"
-            className="block px-3 py-2 text-light hover:text-secondary cursor-pointer"
+            className="flex justify-center m-2 text-primary text-center hover:text-secondary transition-colors cursor-pointer bg-secondary text-white hover:bg-secondary/90 focus:ring-secondary shadow-lg py-3 px-6 rounded-xl font-semibold text-sm transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2"
             onClick={() => setIsMenuOpen(false)}
             target="_blank"
           >

@@ -52,6 +52,15 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="#planos"
+                  onClick={(e) => handleNavigation(e, "planos")}
+                  className="text-gray-100 hover:text-secondary cursor-pointer"
+                >
+                  Planos
+                </a>
+              </li>
+              <li>
+                <a
                   href="#sobre"
                   onClick={(e) => handleNavigation(e, "sobre")}
                   className="text-gray-100 hover:text-secondary cursor-pointer"
