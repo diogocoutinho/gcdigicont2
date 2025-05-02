@@ -196,6 +196,7 @@ export default function Plans() {
                   {cat.features.map((feature, idx) => (
                     <tr
                       key={feature.label}
+                      id={idx.toString()}
                       className="border-b border-gray-100"
                     >
                       <td className="text-left px-6 py-3 text-gray-700 text-sm font-medium">
