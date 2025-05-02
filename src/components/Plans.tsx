@@ -46,7 +46,7 @@ const categories: Category[] = [
       },
       {
         label: "Folha de Pagamento",
-        values: [true, true, true, true],
+        values: [false, true, true, true],
       },
       {
         label: "Pró Labore dos Sócios / Folha de Pagamento",
@@ -188,7 +188,9 @@ export default function Plans() {
                     <div className="text-3xl font-bold text-secondary mb-1 hover:text-secondary/80 transition-colors duration-300">
                       R$ {plan.price}
                     </div>
-                    <div className="text-xs text-gray-400 mb-4 hover:text-gray-500 transition-colors duration-300">/mês</div>
+                    <div className="text-xs text-gray-400 mb-4 hover:text-gray-500 transition-colors duration-300">
+                      /mês
+                    </div>
                     <button className="w-full py-2 px-4 rounded-lg font-semibold text-base transition-all duration-300 bg-secondary text-white hover:bg-secondary/90 hover:scale-105 hover:shadow-lg">
                       Contratar
                     </button>
