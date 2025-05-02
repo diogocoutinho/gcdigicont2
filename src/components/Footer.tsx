@@ -70,6 +70,15 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="#parceiros"
+                  onClick={(e) => handleNavigation(e, "parceiros")}
+                  className="text-gray-100 hover:text-secondary cursor-pointer"
+                >
+                  Parceiros
+                </a>
+              </li>
+              <li>
+                <a
                   href="#contato"
                   onClick={(e) => handleNavigation(e, "contato")}
                   className="text-gray-100 hover:text-secondary cursor-pointer"
