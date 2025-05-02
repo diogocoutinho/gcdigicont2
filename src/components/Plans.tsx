@@ -79,6 +79,21 @@ const categories: Category[] = [
       },
     ],
   },
+  {
+    name: "Faturamento",
+    features: [
+      {
+        label: "Faturamento",
+        values: [
+          "Ideal até R$ 6.750,00 mês",
+          "Ideal até R$ 50.000,00 mês*",
+          "Ideal até R$ 50.000,00 mês*",
+          "Ideal até R$ 50.000,00 mês*",
+        ],
+        note: "* valores acima consulte um consultor pelos canais de Contato",
+      },
+    ],
+  },
 ];
 const additionalServices = [
   { name: "IRPF (Imposto de renda pessoa física)", price: 229 },
