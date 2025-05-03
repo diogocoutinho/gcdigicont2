@@ -43,11 +43,13 @@ const categories: Category[] = [
         label:
           "Contabilidade Completa: Todas as obrigações Contábeis e Legais com a Receita Federal, Estadual e Municipal",
         values: [true, true, true, true],
-      },
-      {
-        label: "Folha de Pagamento",
-        values: [false, true, true, true],
-      },
+      }
+      
+    ],
+  },
+  {
+    name: "Folha de Pagamento",
+    features: [
       {
         label: "Pró Labore dos Sócios / Folha de Pagamento",
         values: ["", "Até 2*", "Até 2*", "Até 2*"],
