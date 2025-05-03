@@ -1,0 +1,10 @@
+# Sempre servir index.html em subpastas (Next.js static export)
+Options -MultiViews
+DirectoryIndex index.html
+
+# Redirecionar /pagina para /pagina/index.html se existir
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.+?)/?$ $1/index.html [L]
