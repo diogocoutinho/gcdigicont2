@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -76,7 +77,7 @@ export const metadata: Metadata = {
     "contabilidade para empresas de fisioterapia",
     "contabilidade para empresas de nutrição",
     "contabilidade para empresas de educação física",
-    "contabilidade para empresas de estética"
+    "contabilidade para empresas de estética",
   ],
   metadataBase: new URL("https://gcdigicont.com.br"),
   openGraph: {
@@ -115,7 +116,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <GoogleAnalytics gaId="G-SY4G9E0XZY" />
+      </body>
     </html>
   );
 }
