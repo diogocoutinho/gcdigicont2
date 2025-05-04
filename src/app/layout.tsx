@@ -95,6 +95,9 @@ export const metadata: Metadata = {
       },
     ],
   },
+  alternates: {
+    canonical: "https://gcdigicont.com.br",
+  },
   twitter: {
     card: "summary_large_image",
     site: "@gcdigicont",
