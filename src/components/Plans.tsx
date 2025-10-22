@@ -15,22 +15,22 @@ type Category = {
 const plans = [
   {
     name: "MEI",
-    price: 80,
+    // price: 80,
     description: "Micro Empreendedor Individual",
   },
   {
     name: "Simples Nacional",
-    price: 120,
+    // price: 120,
     description: "Empresas do Simples Nacional",
   },
   {
     name: "Lucro Presumido",
-    price: 210,
+    // price: 210,
     description: "Empresas de Lucro Presumido",
   },
   {
     name: "Construção Civil",
-    price: 210,
+    // price: 210,
     description: "Empresas da Construção Civil",
   },
 ];
@@ -202,12 +202,12 @@ export default function Plans() {
                     <div className="text-sm text-gray-500 mb-2 hover:text-gray-700 transition-colors duration-300">
                       {plan.description}
                     </div>
-                    <div className="text-3xl font-bold text-secondary mb-1 hover:text-secondary/80 transition-colors duration-300">
-                      R$ {plan.price}
-                    </div>
-                    <div className="text-xs text-gray-400 mb-4 hover:text-gray-500 transition-colors duration-300">
-                      /mês
-                    </div>
+                    {/*<div className="text-3xl font-bold text-secondary mb-1 hover:text-secondary/80 transition-colors duration-300">*/}
+                    {/*  R$ {plan.price}*/}
+                    {/*</div>*/}
+                    {/*<div className="text-xs text-gray-400 mb-4 hover:text-gray-500 transition-colors duration-300">*/}
+                    {/*  /mês*/}
+                    {/*</div>*/}
                     <button className="w-full py-2 px-4 rounded-lg font-semibold text-base transition-all duration-300 bg-secondary text-white hover:bg-secondary/90 hover:scale-105 hover:shadow-lg">
                       Contratar
                     </button>
@@ -269,9 +269,9 @@ export default function Plans() {
                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase">
                       Serviço
                     </th>
-                    <th className="px-6 py-3 text-right text-sm font-medium text-gray-500 uppercase">
-                      Preço (R$)
-                    </th>
+                    {/*<th className="px-6 py-3 text-right text-sm font-medium text-gray-500 uppercase">*/}
+                    {/*  Preço (R$)*/}
+                    {/*</th>*/}
                   </tr>
                 </thead>
                 <tbody>
@@ -283,11 +283,11 @@ export default function Plans() {
                       <td className="px-6 py-4 text-sm text-gray-700">
                         {service.name}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 text-right">
-                        {typeof service.price === "number"
-                          ? `R$ ${service.price.toFixed(2)}`
-                          : service.price}
-                      </td>
+                      {/*<td className="px-6 py-4 text-sm text-gray-900 text-right">*/}
+                      {/*  {typeof service.price === "number"*/}
+                      {/*    ? `R$ ${service.price.toFixed(2)}`*/}
+                      {/*    : service.price}*/}
+                      {/*</td>*/}
                     </tr>
                   ))}
                 </tbody>

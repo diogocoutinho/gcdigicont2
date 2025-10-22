@@ -4,7 +4,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 export default function WhatsAppButton() {
   const handleWhatsAppClick = () => {
-    const phoneNumber = "5531993602476";
+    const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_BUTTON_NUMBER;
     const message =
       "Olá, gostaria de saber mais sobre os serviços da GCDIGICONT!";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(

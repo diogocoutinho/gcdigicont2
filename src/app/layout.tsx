@@ -5,10 +5,22 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0e2b3a",
+};
+
 export const metadata: Metadata = {
   title: "GCDIGICONT - Contabilidade Digital",
   description:
     "Soluções contábeis digitais para empresas: contabilidade, consultoria, folha de pagamento, fiscal e legalização. Atendemos Belo Horizonte, Contagem, Betim, Ibirité, Ribeirão das Neves, Igarapé.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    title: "GCDigiCont",
+    statusBarStyle: "default",
+  },
   keywords: [
     "GCDIGICONT",
     "GCDIGICONT contabilidade",
@@ -30,6 +42,7 @@ export const metadata: Metadata = {
     "contabilidade MEI",
     "contabilidade Lucro Presumido",
     "contabilidade Construção Civil",
+    "consultoria",
     "consultoria contábil",
     "folha de pagamento",
     "abrir empresa BH",
@@ -78,6 +91,15 @@ export const metadata: Metadata = {
     "contabilidade para empresas de nutrição",
     "contabilidade para empresas de educação física",
     "contabilidade para empresas de estética",
+    "abertura de empresa",
+    "balanco contabil",
+    "balanço contábil",
+    "MEI",
+    "Simples Nacional",
+    "Lucro Presumido",
+    "Lucro Real",
+    "planejamento tributario",
+    "reforma tributária"
   ],
   metadataBase: new URL("https://gcdigicont.com.br"),
   openGraph: {
@@ -89,10 +111,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/logo-dark.png",
-        width: 600,
-        height: 315,
-        alt: "GCDIGICONT Logo",
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "GCDIGICONT - Contabilidade Digital",
       },
     ],
   },
@@ -104,7 +126,7 @@ export const metadata: Metadata = {
     site: "@gcdigicont",
     title: "GCDIGICONT - Contabilidade Digital",
     description: "Soluções contábeis digitais para empresas em BH e região.",
-    images: ["/logo-dark.png"],
+    images: ["/og-image.png"],
   },
   robots: "index, follow",
 };
@@ -114,9 +136,114 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "GCDIGICONT - Contabilidade Digital",
+    description:
+      "Soluções contábeis digitais para empresas: contabilidade, consultoria, folha de pagamento, fiscal e legalização.",
+    url: "https://gcdigicont.com.br",
+    logo: "https://gcdigicont.com.br/logo-dark.png",
+    image: "https://gcdigicont.com.br/og-image.png",
+    telephone: "+55-31-98752-9716",
+    email: "contato@gcdigicont.com.br",
+    priceRange: "$$",
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Belo Horizonte",
+        containedInPlace: {
+          "@type": "State",
+          name: "Minas Gerais",
+        },
+      },
+      {
+        "@type": "City",
+        name: "Contagem",
+      },
+      {
+        "@type": "City",
+        name: "Betim",
+      },
+      {
+        "@type": "City",
+        name: "Ibirité",
+      },
+      {
+        "@type": "City",
+        name: "Ribeirão das Neves",
+      },
+      {
+        "@type": "City",
+        name: "Igarapé",
+      },
+    ],
+    serviceType: [
+      "Contabilidade",
+      "Consultoria Contábil",
+      "Folha de Pagamento",
+      "Serviços Fiscais",
+      "Legalização de Empresas",
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Serviços Contábeis",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Contabilidade para MEI",
+            description:
+              "Serviços contábeis para Microempreendedores Individuais",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Contabilidade Simples Nacional",
+            description: "Gestão contábil para empresas do Simples Nacional",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Contabilidade Lucro Presumido",
+            description:
+              "Serviços contábeis para empresas tributadas pelo Lucro Presumido",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Contabilidade para Construção Civil",
+            description:
+              "Contabilidade especializada para empresas de construção civil",
+          },
+        },
+      ],
+    },
+    sameAs: [
+      "https://www.facebook.com/gcdigicont",
+      "https://www.instagram.com/gcdigicont",
+      "https://www.linkedin.com/company/gcdigicont",
+    ],
+  };
+
   return (
     <html lang="pt-BR">
+    <head>
+      <meta name="apple-mobile-web-app-title" content="GCDigiCont" />
+      <title>GCDigiCont</title>
+    </head>
       <body className={inter.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         {children}
         <GoogleAnalytics gaId="G-YKE4ERKDJP" />
       </body>
