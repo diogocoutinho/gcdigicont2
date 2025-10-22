@@ -174,6 +174,7 @@ export default function Plans() {
     "Ibirité",
     "Ribeirão das Neves",
     "Igarapé",
+    "Bom Despacho"
   ];
   return (
     <section
