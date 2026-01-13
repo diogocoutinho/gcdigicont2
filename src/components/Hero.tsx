@@ -3,13 +3,17 @@
 import Image from "next/image";
 import { smoothScroll } from "@/utils/smoothScroll";
 import WhatsAppButton from "./WhatsAppButton";
+import { analytics } from "@/utils/analytics";
 
 export default function Hero() {
   const handleScroll = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    targetId: string
+    targetId: string,
+    ctaName: string
   ) => {
     e.preventDefault();
+    // Rastrear clique no CTA
+    analytics.ctaClick(ctaName, "hero");
     smoothScroll(targetId);
   };
 
@@ -47,14 +51,14 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
               <a
                 href="#contato"
-                onClick={(e) => handleScroll(e, "contato")}
+                onClick={(e) => handleScroll(e, "contato", "Fale Conosco")}
                 className="btn-secondary inline-block text-center px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 hover:bg-secondary/90 hover:scale-105 transform shadow-lg hover:shadow-secondary/20"
               >
                 Fale Conosco
               </a>
               <a
                 href="#servicos"
-                onClick={(e) => handleScroll(e, "servicos")}
+                onClick={(e) => handleScroll(e, "servicos", "Nossos Serviços")}
                 className="btn-primary bg-white/10 inline-block text-center px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 hover:bg-white/20 hover:scale-105 transform shadow-lg hover:shadow-white/10"
               >
                 Nossos Serviços

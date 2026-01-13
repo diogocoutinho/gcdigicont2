@@ -1,9 +1,13 @@
 "use client";
 
 import { FaWhatsapp } from "react-icons/fa";
+import { analytics } from "@/utils/analytics";
 
 export default function WhatsAppButton() {
   const handleWhatsAppClick = () => {
+    // Rastrear clique no GA4
+    analytics.whatsappClick();
+
     const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_BUTTON_NUMBER;
     const message =
       "Olá, gostaria de saber mais sobre os serviços da GCDIGICONT!";

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
+import { analytics } from "@/utils/analytics";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -17,6 +18,9 @@ export default function Contact() {
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
+
+  // Rastrear se o usuário já começou a preencher o formulário
+  const hasStartedForm = useRef(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,15 +41,20 @@ export default function Contact() {
       );
 
       if (result.status === 200) {
+        // Rastrear envio bem-sucedido
+        analytics.formSubmit(true);
         setSubmitStatus({
           type: "success",
           message:
             "Mensagem enviada com sucesso! Entraremos em contato em breve.",
         });
         setFormData({ name: "", email: "", phone: "", message: "" });
+        hasStartedForm.current = false;
       }
     } catch (error) {
       console.error(error);
+      // Rastrear erro no envio
+      analytics.formSubmit(false);
       setSubmitStatus({
         type: "error",
         message:
@@ -59,6 +68,12 @@ export default function Contact() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    // Rastrear início do preenchimento do formulário
+    if (!hasStartedForm.current) {
+      analytics.formStart();
+      hasStartedForm.current = true;
+    }
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,

@@ -11,15 +11,25 @@ import Services from "@/components/Services";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <>
+      {/* Skip Link para Acessibilidade - WCAG 2.1 */}
+      <a
+        href="#conteudo-principal"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-secondary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
+      >
+        Pular para o conteúdo principal
+      </a>
+
       <Header />
-      <Hero />
-      <About />
-      <Services />
-      <Plans />
-      <Partners />
-      <Contact />
+      <main id="conteudo-principal" className="flex min-h-screen flex-col">
+        <Hero />
+        <About />
+        <Services />
+        <Plans />
+        <Partners />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

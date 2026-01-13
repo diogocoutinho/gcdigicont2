@@ -5,6 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { smoothScroll } from "@/utils/smoothScroll";
+import { analytics } from "@/utils/analytics";
+
+// Links das redes sociais - ATUALIZE AQUI com as URLs reais
+const SOCIAL_LINKS = {
+  facebook: "https://www.facebook.com/gcdigicont", // Substitua pelo link real
+  instagram: "https://www.instagram.com/gcdigicont", // Substitua pelo link real
+  linkedin: "https://www.linkedin.com/company/gcdigicont", // Substitua pelo link real
+};
 
 export default function Footer() {
   const pathname = usePathname();
@@ -19,6 +27,10 @@ export default function Footer() {
     } else {
       window.location.href = `/#${targetId}`;
     }
+  };
+
+  const handleSocialClick = (platform: string) => {
+    analytics.socialClick(platform);
   };
 
   return (
@@ -112,26 +124,32 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Redes Sociais</h3>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href={SOCIAL_LINKS.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-100 hover:text-secondary"
+                className="text-gray-100 hover:text-secondary transition-colors"
+                onClick={() => handleSocialClick("facebook")}
+                aria-label="Siga-nos no Facebook"
               >
                 <FaFacebook className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href={SOCIAL_LINKS.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-100 hover:text-secondary"
+                className="text-gray-100 hover:text-secondary transition-colors"
+                onClick={() => handleSocialClick("instagram")}
+                aria-label="Siga-nos no Instagram"
               >
                 <FaInstagram className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-100 hover:text-secondary"
+                className="text-gray-100 hover:text-secondary transition-colors"
+                onClick={() => handleSocialClick("linkedin")}
+                aria-label="Siga-nos no LinkedIn"
               >
                 <FaLinkedin className="w-6 h-6" />
               </a>
