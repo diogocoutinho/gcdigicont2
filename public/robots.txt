@@ -1,3 +1,23 @@
+# Robots.txt para GCDIGICONT
+# https://gcdigicont.com.br
+
 User-agent: *
 Allow: /
-Sitemap: https://gcdigicont.com.br/sitemap.xml 
+
+# Bloquear diretórios que não devem ser indexados
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Sitemaps
+Sitemap: https://gcdigicont.com.br/sitemap.xml
+
+# Crawl delay para bots específicos (opcional, ajuda a gerenciar crawl budget)
+User-agent: Googlebot
+Crawl-delay: 1
+
+User-agent: Bingbot
+Crawl-delay: 1
+
+User-agent: Yandex
+Crawl-delay: 2
