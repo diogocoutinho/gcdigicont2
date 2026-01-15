@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -235,10 +236,10 @@ export default function RootLayout({
 
   return (
     <html lang="pt-BR">
-    <head>
-      <meta name="apple-mobile-web-app-title" content="GCDigiCont" />
-      <title>GCDigiCont</title>
-    </head>
+      <head>
+        <meta name="apple-mobile-web-app-title" content="GCDigiCont" />
+        <title>GCDigiCont</title>
+      </head>
       <body className={inter.className}>
         <script
           type="application/ld+json"
@@ -246,6 +247,7 @@ export default function RootLayout({
         />
         {children}
         <GoogleAnalytics gaId="G-YKE4ERKDJP" />
+        <WhatsAppButton />
       </body>
     </html>
   );

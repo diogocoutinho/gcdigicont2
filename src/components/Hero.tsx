@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { smoothScroll } from "@/utils/smoothScroll";
-import WhatsAppButton from "./WhatsAppButton";
+
+import { motion } from "framer-motion";
+import ScrollReveal from "./ScrollReveal";
 
 export default function Hero() {
   const handleScroll = (
@@ -16,91 +18,100 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 min-h-[600px] flex items-center overflow-hidden"
+      className="relative pt-32 pb-20 sm:pt-40 sm:pb-32 min-h-screen flex items-center overflow-hidden"
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/hero-bg.jpg"
-          alt="Profissionais GCDIGICONT"
-          fill
-          className="object-cover scale-105"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/85 to-background/75" />
+        <motion.div
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 10, ease: "easeOut" }}
+          className="relative w-full h-full"
+        >
+          <Image
+            src="/hero-bg.jpg"
+            alt="Profissionais GCDIGICONT"
+            fill
+            className="object-cover"
+            priority
+          />
+        </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/60" />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="text-white space-y-8">
-            <div className="text-center space-y-4">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-                Contabilidade Digital para o{" "}
-                <span className="text-secondary">Sucesso</span> do seu Negócio
-              </h1>
-              <p className="text-base sm:text-lg text-gray-100 max-w-2xl mx-auto">
-                Soluções contábeis modernas e personalizadas para empresas que
-                buscam crescimento e eficiência.
-              </p>
+          <div className="text-white space-y-8 text-center sm:text-left">
+            <div className="space-y-6">
+              <ScrollReveal>
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
+                  Contabilidade Digital para o{" "}
+                  <span className="text-gradient drop-shadow-lg">Sucesso</span> do
+                  seu Negócio
+                </h1>
+              </ScrollReveal>
+
+              <ScrollReveal delay={0.2} width="100%">
+                <p className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto sm:mx-0 leading-relaxed">
+                  Soluções contábeis modernas e personalizadas para empresas que
+                  buscam crescimento, eficiência e tranquilidade fiscal.
+                </p>
+              </ScrollReveal>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
-              <a
-                href="#contato"
-                onClick={(e) => handleScroll(e, "contato")}
-                className="btn-secondary inline-block text-center px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 hover:bg-secondary/90 hover:scale-105 transform shadow-lg hover:shadow-secondary/20"
-              >
-                Fale Conosco
-              </a>
-              <a
-                href="#servicos"
-                onClick={(e) => handleScroll(e, "servicos")}
-                className="btn-primary bg-white/10 inline-block text-center px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 hover:bg-white/20 hover:scale-105 transform shadow-lg hover:shadow-white/10"
-              >
-                Nossos Serviços
-              </a>
-            </div>
-
-            <div className="pt-12">
-              <p className="text-gray-200 mb-6 text-base font-medium text-center">
-                Confie em quem entende:
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
-                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 text-center transform transition-all duration-300 hover:scale-105 hover:bg-white/10 border border-white/10">
-                  <div className="text-3xl font-bold text-secondary mb-1">
-                    +500
-                  </div>
-                  <div className="text-xs text-gray-200 font-medium">
-                    Clientes Atendidos
-                  </div>
-                </div>
-                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 text-center transform transition-all duration-300 hover:scale-105 hover:bg-white/10 border border-white/10">
-                  <div className="text-3xl font-bold text-secondary mb-1">
-                    15+
-                  </div>
-                  <div className="text-xs text-gray-200 font-medium">
-                    Anos de Experiência
-                  </div>
-                </div>
-                <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 text-center transform transition-all duration-300 hover:scale-105 hover:bg-white/10 border border-white/10">
-                  <div className="text-3xl font-bold text-secondary mb-1">
-                    100%
-                  </div>
-                  <div className="text-xs text-gray-200 font-medium">
-                    Digital
-                  </div>
-                </div>
+            <ScrollReveal delay={0.4} width="100%">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start pt-4">
+                <motion.a
+                  href="#contato"
+                  onClick={(e) => handleScroll(e, "contato")}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-secondary text-primary px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-secondary/30 transition-all text-center"
+                >
+                  Fale Conosco
+                </motion.a>
+                <motion.a
+                  href="#servicos"
+                  onClick={(e) => handleScroll(e, "servicos")}
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="glass text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all text-center flex items-center justify-center gap-2"
+                >
+                  Nossos Serviços
+                </motion.a>
               </div>
-            </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.6} width="100%">
+              <div className="pt-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {[
+                  { value: "+500", label: "Clientes Atendidos" },
+                  { value: "15+", label: "Anos de Experiência" },
+                  { value: "100%", label: "Digital & Humanizado" },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    whileHover={{ y: -5 }}
+                    className="glass p-6 rounded-xl text-center border-t border-white/20 hover:bg-white/5 transition-colors"
+                  >
+                    <div className="text-4xl font-bold text-secondary mb-2">
+                      {stat.value}
+                    </div>
+                    <div className="text-sm text-gray-300 font-medium uppercase tracking-wider">
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
 
-      {/* WhatsApp Button */}
-      <WhatsAppButton />
+
     </section>
   );
 }

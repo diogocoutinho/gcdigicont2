@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "export",
   images: {
-    domains: ["easydevsolucoes.github.io"],
+    domains: ["easydevsolucoes.com.br"],
     unoptimized: true,
   },
   experimental: {

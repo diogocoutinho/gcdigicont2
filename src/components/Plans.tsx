@@ -2,6 +2,8 @@
 
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import { useState, Fragment } from "react";
+import ScrollReveal from "./ScrollReveal";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Category = {
   name: string;
@@ -15,22 +17,18 @@ type Category = {
 const plans = [
   {
     name: "MEI",
-    // price: 80,
     description: "Micro Empreendedor Individual",
   },
   {
     name: "Simples Nacional",
-    // price: 120,
     description: "Empresas do Simples Nacional",
   },
   {
     name: "Lucro Presumido",
-    // price: 210,
     description: "Empresas de Lucro Presumido",
   },
   {
     name: "Construção Civil",
-    // price: 210,
     description: "Empresas da Construção Civil",
   },
 ];
@@ -43,8 +41,7 @@ const categories: Category[] = [
         label:
           "Contabilidade Completa: Todas as obrigações Contábeis e Legais com a Receita Federal, Estadual e Municipal",
         values: [true, true, true, true],
-      }
-      
+      },
     ],
   },
   {
@@ -97,33 +94,31 @@ const categories: Category[] = [
     ],
   },
 ];
+
 const additionalServices = [
-  { name: "IRPF (Imposto de renda pessoa física)", price: 229 },
-  { name: "Alteração Contratual (EI e LTDA)", price: "1250 + taxas" },
-  { name: "Alteração de Natureza Jurídica", price: 1339 },
-  { name: "Preenchimento de Alvará", price: 399 },
-  { name: "Baixa MEI", price: 209 },
-  {
-    name: "Taxa de Reprocessamento (em qualquer alteração ou constituição)",
-    price: 299.9,
-  },
-  { name: "Ativação de Inscrição Estadual", price: 209 },
-  { name: "Baixa empresa Lucro Presumido", price: 1259 },
-  { name: "Baixa empresa Simples Nacional", price: 1259 },
-  { name: "Declaração de Faturamento", price: 49 },
-  { name: "Autenticação de Livros na Junta", price: 349 },
-  { name: "Reemissão de Guias (impostos e outros)", price: 49.9 },
-  { name: "Formulários Diversos (bancos, fornecedores, etc)", price: 69 },
-  { name: "Parcelamento de Impostos", price: 209 },
-  { name: "Rescisão e Admissão de Funcionários", price: 109 },
-  { name: "Verificação de Pendências", price: 209 },
-  { name: "Migração de MEI para ME", price: 1399 },
-  { name: "Retificação (DAS)", price: 69.9 },
-  { name: "Retificação de impostos", price: 79.9 },
-  { name: "Registro de marca", price: 997 },
-  { name: "LTCAT", price: 699.9 },
-  { name: "Certificado digital PF", price: 150 },
-  { name: "Certificado digital PJ", price: 250 },
+  { name: "IRPF (Imposto de renda pessoa física)" },
+  { name: "Alteração Contratual (EI e LTDA)" },
+  { name: "Alteração de Natureza Jurídica" },
+  { name: "Preenchimento de Alvará" },
+  { name: "Baixa MEI" },
+  { name: "Taxa de Reprocessamento (em qualquer alteração ou constituição)" },
+  { name: "Ativação de Inscrição Estadual" },
+  { name: "Baixa empresa Lucro Presumido" },
+  { name: "Baixa empresa Simples Nacional" },
+  { name: "Declaração de Faturamento" },
+  { name: "Autenticação de Livros na Junta" },
+  { name: "Reemissão de Guias (impostos e outros)" },
+  { name: "Formulários Diversos (bancos, fornecedores, etc)" },
+  { name: "Parcelamento de Impostos" },
+  { name: "Rescisão e Admissão de Funcionários" },
+  { name: "Verificação de Pendências" },
+  { name: "Migração de MEI para ME" },
+  { name: "Retificação (DAS)" },
+  { name: "Retificação de impostos" },
+  { name: "Registro de marca" },
+  { name: "LTCAT" },
+  { name: "Certificado digital PF" },
+  { name: "Certificado digital PJ" },
 ];
 
 function renderCell(value: boolean | string | undefined) {
@@ -176,143 +171,146 @@ export default function Plans() {
     "Igarapé",
     "Bom Despacho"
   ];
+
   return (
     <section
       id="planos"
       className="py-24 bg-gradient-to-b from-gray-50 to-white"
     >
       <div className="container mx-auto px-2 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl font-bold text-light mb-4">
-            Conheça nossos planos.
-          </h2>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-[700px] w-full bg-white rounded-2xl shadow-lg">
-            <thead>
-              <tr>
-                <th className="w-64"></th>
-                {plans.map((plan) => (
-                  <th
-                    key={plan.name}
-                    className="text-center px-6 py-6 align-bottom border-b-2 border-gray-100 hover:bg-gray-50 transition-all duration-300"
-                  >
-                    <div className="text-2xl font-bold text-light mb-1 hover:text-secondary transition-colors duration-300">
-                      {plan.name}
-                    </div>
-                    <div className="text-sm text-gray-500 mb-2 hover:text-gray-700 transition-colors duration-300">
-                      {plan.description}
-                    </div>
-                    {/*<div className="text-3xl font-bold text-secondary mb-1 hover:text-secondary/80 transition-colors duration-300">*/}
-                    {/*  R$ {plan.price}*/}
-                    {/*</div>*/}
-                    {/*<div className="text-xs text-gray-400 mb-4 hover:text-gray-500 transition-colors duration-300">*/}
-                    {/*  /mês*/}
-                    {/*</div>*/}
-                    <button className="w-full py-2 px-4 rounded-lg font-semibold text-base transition-all duration-300 bg-secondary text-white hover:bg-secondary/90 hover:scale-105 hover:shadow-lg">
-                      Contratar
-                    </button>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {categories.map((cat) => (
-                <Fragment key={cat.name}>
-                  <tr key={cat.name + "-cat"}>
-                    <td
-                      colSpan={plans.length + 1}
-                      className="bg-gray-50 text-left px-6 py-3 font-bold text-light text-base border-t border-b border-gray-100"
+        <ScrollReveal width="100%">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold text-light mb-4">
+              Conheça nossos <span className="text-secondary">Planos</span>
+            </h2>
+            <div className="w-24 h-1 bg-secondary mx-auto rounded-full" />
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.2} width="100%">
+          <div className="overflow-x-auto pb-4 custom-scrollbar">
+            <table className="min-w-[900px] w-full bg-white rounded-2xl shadow-xl overflow-hidden border-collaspe">
+              <thead>
+                <tr>
+                  <th className="w-64 bg-gray-50 border-b border-gray-100 p-4"></th>
+                  {plans.map((plan) => (
+                    <th
+                      key={plan.name}
+                      className="text-center px-6 py-8 align-bottom border-b border-r last:border-r-0 border-gray-100 hover:bg-gray-50 transition-colors"
                     >
-                      {cat.name}
-                    </td>
-                  </tr>
-                  {cat.features.map((feature, idx) => (
-                    <tr
-                      key={feature.label}
-                      id={idx.toString()}
-                      className="border-b border-gray-100"
-                    >
-                      <td className="text-left px-6 py-3 text-gray-700 text-sm font-medium">
-                        <FeatureLabelWithNote
-                          label={feature.label}
-                          note={feature.note}
-                        />
-                      </td>
-                      {feature.values.map((value, i) => (
-                        <td key={i} className="px-6 py-3">
-                          {renderCell(value)}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {/* Serviços adicionais colapsável */}
-        <div className="mt-16 text-center">
-          <button
-            onClick={() => setShowAdditional(!showAdditional)}
-            className="inline-flex items-center text-2xl font-bold text-light mb-4 focus:outline-none"
-          >
-            Serviços Adicionais
-            <span className="ml-2 text-light">
-              {showAdditional ? "−" : "+"}
-            </span>
-          </button>
-          {showAdditional && (
-            <div className="overflow-x-auto mt-4 max-w-3xl mx-auto">
-              <table className="min-w-full bg-white rounded-xl overflow-hidden">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase">
-                      Serviço
+                      <div className="text-xl font-bold text-light mb-2">
+                        {plan.name}
+                      </div>
+                      <div className="text-sm text-gray-500 mb-6 min-h-[40px]">
+                        {plan.description}
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 bg-secondary text-white shadow-md hover:shadow-lg hover:bg-secondary/90"
+                      >
+                        Contratar
+                      </motion.button>
                     </th>
-                    {/*<th className="px-6 py-3 text-right text-sm font-medium text-gray-500 uppercase">*/}
-                    {/*  Preço (R$)*/}
-                    {/*</th>*/}
-                  </tr>
-                </thead>
-                <tbody>
-                  {additionalServices.map((service, index) => (
-                    <tr
-                      key={service.name}
-                      className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
-                    >
-                      <td className="px-6 py-4 text-sm text-gray-700">
-                        {service.name}
-                      </td>
-                      {/*<td className="px-6 py-4 text-sm text-gray-900 text-right">*/}
-                      {/*  {typeof service.price === "number"*/}
-                      {/*    ? `R$ ${service.price.toFixed(2)}`*/}
-                      {/*    : service.price}*/}
-                      {/*</td>*/}
-                    </tr>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
+                </tr>
+              </thead>
+              <tbody>
+                {categories.map((cat) => (
+                  <Fragment key={cat.name}>
+                    <tr key={cat.name + "-cat"}>
+                      <td
+                        colSpan={plans.length + 1}
+                        className="bg-gray-50/80 text-left px-6 py-4 font-bold text-light text-base border-t border-b border-gray-100 backdrop-blur-sm"
+                      >
+                        {cat.name}
+                      </td>
+                    </tr>
+                    {cat.features.map((feature, idx) => (
+                      <tr
+                        key={feature.label}
+                        id={idx.toString()}
+                        className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors group"
+                      >
+                        <td className="text-left px-6 py-4 text-gray-700 text-sm font-medium border-r border-gray-100">
+                          <FeatureLabelWithNote
+                            label={feature.label}
+                            note={feature.note}
+                          />
+                        </td>
+                        {feature.values.map((value, i) => (
+                          <td key={i} className="px-6 py-4 border-r border-gray-100 last:border-0 text-center">
+                            {renderCell(value)}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </ScrollReveal>
+
+        {/* Serviços adicionais colapsável */}
+        <ScrollReveal delay={0.4} width="100%">
+          <div className="mt-16 text-center">
+            <button
+              onClick={() => setShowAdditional(!showAdditional)}
+              className="group inline-flex items-center text-2xl font-bold text-light mb-4 focus:outline-none hover:text-secondary transition-colors"
+            >
+              Serviços Adicionais
+              <span className={`ml-3 w-8 h-8 rounded-full border-2 border-current flex items-center justify-center text-lg transition-transform duration-300 ${showAdditional ? "rotate-45" : ""}`}>
+                +
+              </span>
+            </button>
+            <AnimatePresence>
+              {showAdditional && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 max-w-5xl mx-auto">
+                    <div className="bg-secondary/5 p-6 border-b border-gray-100">
+                      <p className="text-gray-600">Consulte valores para serviços avulsos</p>
+                    </div>
+                    <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 text-left">
+                      {additionalServices.map((service, index) => (
+                        <div key={index} className="flex items-center py-2 border-b border-gray-50 hover:bg-gray-50 px-2 rounded-lg transition-colors group">
+                          <div className="w-1.5 h-1.5 rounded-full bg-secondary/50 group-hover:bg-secondary transition-colors shrink-0 mr-3" />
+                          <span className="text-sm font-medium text-gray-700">{service.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </ScrollReveal>
+
         {/* Cidades atendidas */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold text-light mb-8 relative inline-block group">
-            Cidades Atendidas
-            <span className="absolute bottom-0 left-0 w-full h-1 bg-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-          </h3>
-          <ul className="flex flex-wrap justify-center gap-4 text-gray-700 text-lg">
-            {cidades.map((cidade) => (
-              <li
-                key={cidade}
-                className="bg-gray-100 rounded-full px-5 py-2 shadow-sm hover:bg-secondary hover:text-white transition-all duration-300 hover:scale-105 cursor-default"
-              >
-                {cidade}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ScrollReveal delay={0.6} width="100%">
+          <div className="mt-20 text-center">
+            <h3 className="text-2xl font-bold text-light mb-8 relative inline-block group">
+              Cidades Atendidas
+              <span className="absolute bottom-0 left-0 w-full h-1 bg-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </h3>
+            <ul className="flex flex-wrap justify-center gap-4">
+              {cidades.map((cidade) => (
+                <motion.li
+                  key={cidade}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="bg-white border border-gray-200 rounded-full px-6 py-2 shadow-sm text-gray-700 font-medium cursor-default hover:border-secondary hover:text-secondary transition-colors"
+                >
+                  {cidade}
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
