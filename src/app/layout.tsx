@@ -130,6 +130,17 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   robots: "index, follow",
+  authors: [{ name: "GCDIGICONT" }],
+  generator: "Next.js",
+  applicationName: "GCDIGICONT",
+  referrer: "origin-when-cross-origin",
+  creator: "GCDIGICONT",
+  publisher: "GCDIGICONT",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
 };
 
 export default function RootLayout({
@@ -137,7 +148,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const structuredData = {
+  const professionalServiceSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: "GCDIGICONT - Contabilidade Digital",
@@ -234,16 +245,60 @@ export default function RootLayout({
     ],
   };
 
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://gcdigicont.com.br/#localbusiness",
+    name: "GCDIGICONT - Contabilidade Digital",
+    image: "https://gcdigicont.com.br/og-image.png",
+    logo: "https://gcdigicont.com.br/logo-dark.png",
+    url: "https://gcdigicont.com.br",
+    telephone: "+5531987529716",
+    email: "contato@gcdigicont.com.br",
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Belo Horizonte",
+      addressRegion: "MG",
+      addressCountry: "BR",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: -19.9191,
+      longitude: -43.9386,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        opens: "08:00",
+        closes: "18:00",
+      },
+    ],
+    sameAs: [
+      "https://www.facebook.com/gcdigicont",
+      "https://www.instagram.com/gcdigicont",
+      "https://www.linkedin.com/company/gcdigicont",
+    ],
+  };
+
   return (
     <html lang="pt-BR">
-      <head>
-        <meta name="apple-mobile-web-app-title" content="GCDigiCont" />
-        <title>GCDigiCont</title>
-      </head>
+
       <body className={inter.className}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         {children}
         <GoogleAnalytics gaId="G-YKE4ERKDJP" />
