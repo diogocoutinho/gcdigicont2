@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["tailwindcss"],
   },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
   trailingSlash: true,
 };
 
