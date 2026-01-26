@@ -45,3 +45,4 @@ gcdigicont
 gcdigicont.pub
 
 company
+.env*.local
