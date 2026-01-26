@@ -40,13 +40,11 @@ export default function Hero() {
         <div className="max-w-4xl mx-auto">
           <div className="text-white space-y-8 text-center sm:text-left">
             <div className="space-y-6">
-              <ScrollReveal>
-                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
-                  Contabilidade Digital para o{" "}
-                  <span className="text-gradient drop-shadow-lg">Sucesso</span> do
-                  seu Negócio
-                </h1>
-              </ScrollReveal>
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight animate-fade-in-up">
+                Contabilidade Digital para o{" "}
+                <span className="text-gradient drop-shadow-lg">Sucesso</span> do
+                seu Negócio
+              </h1>
 
               <ScrollReveal delay={0.2} width="100%">
                 <p className="text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto sm:mx-0 leading-relaxed">
