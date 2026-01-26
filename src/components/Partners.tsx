@@ -29,7 +29,7 @@ export default function Partners() {
               title="EasyDev Soluções"
             >
               <Image
-                src="https://easydevsolucoes.com.br/company/logoEasyDev.png"
+                src="/logoEasyDev.png"
                 alt="EasyDev Soluções"
                 width={280}
                 height={280}
