@@ -22,12 +22,7 @@ export default function Hero() {
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <motion.div
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 10, ease: "easeOut" }}
-          className="relative w-full h-full"
-        >
+        <div className="animate-hero-zoom relative w-full h-full">
           <Image
             src="/hero-bg.jpg"
             alt="Profissionais GCDIGICONT"
@@ -35,7 +30,7 @@ export default function Hero() {
             className="object-cover"
             priority
           />
-        </motion.div>
+        </div>
         <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/60" />
       </div>
 
