@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, UseInViewOptions, Variants } from "framer-motion";
+import { m, useInView, UseInViewOptions, Variants } from "framer-motion";
 import { useRef } from "react";
 
 interface ScrollRevealProps {
@@ -31,7 +31,7 @@ export default function ScrollReveal({
     const isInView = useInView(ref, viewOptions);
 
     return (
-        <motion.div
+        <m.div
             ref={ref}
             variants={variants}
             initial="hidden"
@@ -41,6 +41,6 @@ export default function ScrollReveal({
             style={{ width }}
         >
             {children}
-        </motion.div>
+        </m.div>
     );
 }

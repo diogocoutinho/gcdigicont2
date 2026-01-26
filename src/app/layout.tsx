@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import FramerMotionProvider from "@/components/FramerMotionProvider";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -185,7 +186,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <FramerMotionProvider>
+          {children}
+        </FramerMotionProvider>
         <GoogleAnalytics gaId="G-YKE4ERKDJP" />
         <WhatsAppButton />
       </body>

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { smoothScroll } from "@/utils/smoothScroll";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 
 export default function Hero() {
@@ -56,7 +56,7 @@ export default function Hero() {
 
             <ScrollReveal delay={0.4} width="100%">
               <div className="flex flex-col sm:flex-row gap-4 justify-center sm:justify-start pt-4">
-                <motion.a
+                <m.a
                   href="#contato"
                   onClick={(e) => handleScroll(e, "contato")}
                   whileHover={{ scale: 1.05 }}
@@ -65,8 +65,8 @@ export default function Hero() {
                   aria-label="Entre em contato com a GCDIGICONT"
                 >
                   Fale Conosco
-                </motion.a>
-                <motion.a
+                </m.a>
+                <m.a
                   href="#servicos"
                   onClick={(e) => handleScroll(e, "servicos")}
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
@@ -75,7 +75,7 @@ export default function Hero() {
                   aria-label="Conheça nossos serviços de contabilidade"
                 >
                   Nossos Serviços
-                </motion.a>
+                </m.a>
               </div>
             </ScrollReveal>
 
@@ -86,7 +86,7 @@ export default function Hero() {
                   { value: "15+", label: "Anos de Experiência" },
                   { value: "100%", label: "Digital & Humanizado" },
                 ].map((stat, index) => (
-                  <motion.div
+                  <m.div
                     key={index}
                     whileHover={{ y: -5 }}
                     className="glass p-6 rounded-xl text-center border-t border-white/20 hover:bg-white/5 transition-colors"
@@ -97,7 +97,7 @@ export default function Hero() {
                     <div className="text-sm text-gray-300 font-medium uppercase tracking-wider">
                       {stat.label}
                     </div>
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
             </ScrollReveal>

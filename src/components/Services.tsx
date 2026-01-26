@@ -8,7 +8,7 @@ import {
   FaBuilding,
 } from "react-icons/fa";
 import ScrollReveal from "./ScrollReveal";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const services = [
   {
@@ -67,7 +67,7 @@ export default function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <ScrollReveal key={index} delay={index * 0.1} width="100%">
-              <motion.div
+              <m.div
                 whileHover={{ y: -10 }}
                 className="bg-white rounded-2xl shadow-lg p-8 h-full border border-gray-100 hover:shadow-2xl hover:shadow-secondary/5 hover:border-secondary/20 transition-all duration-300 group"
               >
@@ -80,7 +80,7 @@ export default function Services() {
                 <p className="text-gray-600 leading-relaxed">
                   {service.description}
                 </p>
-              </motion.div>
+              </m.div>
             </ScrollReveal>
           ))}
         </div>

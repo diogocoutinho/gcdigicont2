@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
-import emailjs from "@emailjs/browser";
 import ScrollReveal from "./ScrollReveal";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -26,6 +25,7 @@ export default function Contact() {
     setSubmitStatus({ type: null, message: "" });
 
     try {
+      const emailjs = (await import("@emailjs/browser")).default;
       const result = await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
@@ -92,7 +92,7 @@ export default function Contact() {
           {/* Contact Information */}
           <div className="space-y-6">
             <ScrollReveal delay={0.2} width="100%">
-              <motion.div
+              <m.div
                 whileHover={{ y: -5 }}
                 className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-center gap-6 group hover:border-secondary/30 transition-all"
               >
@@ -105,11 +105,11 @@ export default function Contact() {
                     contato@gcdigicont.com.br
                   </a>
                 </div>
-              </motion.div>
+              </m.div>
             </ScrollReveal>
 
             <ScrollReveal delay={0.3} width="100%">
-              <motion.div
+              <m.div
                 whileHover={{ y: -5 }}
                 className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-center gap-6 group hover:border-secondary/30 transition-all"
               >
@@ -124,11 +124,11 @@ export default function Contact() {
                     +55 (31) 99360-2476
                   </a>
                 </div>
-              </motion.div>
+              </m.div>
             </ScrollReveal>
 
             <ScrollReveal delay={0.4} width="100%">
-              <motion.div
+              <m.div
                 whileHover={{ y: -5 }}
                 className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-center gap-6 group hover:border-secondary/30 transition-all"
               >
@@ -143,7 +143,7 @@ export default function Contact() {
                     +55 (31) 98752-9716
                   </a>
                 </div>
-              </motion.div>
+              </m.div>
             </ScrollReveal>
           </div>
 
@@ -154,7 +154,7 @@ export default function Contact() {
               className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 space-y-6"
             >
               {submitStatus.type && (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className={`p-4 rounded-xl text-sm font-medium ${submitStatus.type === "success"
@@ -163,7 +163,7 @@ export default function Contact() {
                     }`}
                 >
                   {submitStatus.message}
-                </motion.div>
+                </m.div>
               )}
 
               <div className="space-y-2">
@@ -248,7 +248,7 @@ export default function Contact() {
                 />
               </div>
 
-              <motion.button
+              <m.button
                 type="submit"
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.02 }}
@@ -259,7 +259,7 @@ export default function Contact() {
                   }`}
               >
                 {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
-              </motion.button>
+              </m.button>
             </form>
           </ScrollReveal>
         </div>

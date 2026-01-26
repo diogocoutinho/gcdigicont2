@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { smoothScroll } from "@/utils/smoothScroll";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -106,7 +106,7 @@ export default function Header() {
             >
               Contato
             </a>
-            <motion.div
+            <m.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -117,7 +117,7 @@ export default function Header() {
               >
                 Área do Cliente
               </Link>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Mobile menu button */}
@@ -165,7 +165,7 @@ export default function Header() {
       {/* Mobile menu */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -219,7 +219,7 @@ export default function Header() {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

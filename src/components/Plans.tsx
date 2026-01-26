@@ -3,7 +3,7 @@
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import { useState, Fragment } from "react";
 import ScrollReveal from "./ScrollReveal";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 type Category = {
   name: string;
@@ -204,13 +204,13 @@ export default function Plans() {
                       <div className="text-sm text-gray-500 mb-6 min-h-[40px]">
                         {plan.description}
                       </div>
-                      <motion.button
+                      <m.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="w-full py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 bg-secondary text-white shadow-md hover:shadow-lg hover:bg-secondary/90"
                       >
                         Contratar
-                      </motion.button>
+                      </m.button>
                     </th>
                   ))}
                 </tr>
@@ -266,7 +266,7 @@ export default function Plans() {
             </button>
             <AnimatePresence>
               {showAdditional && (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
@@ -285,7 +285,7 @@ export default function Plans() {
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
           </div>
@@ -300,13 +300,13 @@ export default function Plans() {
             </h3>
             <ul className="flex flex-wrap justify-center gap-4">
               {cidades.map((cidade) => (
-                <motion.li
+                <m.li
                   key={cidade}
                   whileHover={{ scale: 1.05, y: -2 }}
                   className="bg-white border border-gray-200 rounded-full px-6 py-2 shadow-sm text-gray-700 font-medium cursor-default hover:border-secondary hover:text-secondary transition-colors"
                 >
                   {cidade}
-                </motion.li>
+                </m.li>
               ))}
             </ul>
           </div>
