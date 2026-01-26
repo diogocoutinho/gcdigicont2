@@ -31,8 +31,8 @@ export default function Partners() {
               <Image
                 src="/easydev-logo.png"
                 alt="EasyDev Soluções"
-                width={280}
-                height={280}
+                width={200}
+                height={200}
                 className="object-contain h-32 w-auto grayscale hover:grayscale-0 transition-all duration-300"
                 priority
               />
