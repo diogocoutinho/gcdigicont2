@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { smoothScroll } from "@/utils/smoothScroll";
 import ScrollReveal from "./ScrollReveal";
+import { CLIENT_AREA_URL, socialLinks } from "@/data/site";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -18,7 +19,7 @@ export default function Footer() {
     if (pathname === "/") {
       smoothScroll(targetId);
     } else {
-      window.location.href = `/#${targetId}`;
+      window.location.assign(`/#${targetId}`);
     }
   };
 
@@ -68,8 +69,9 @@ export default function Footer() {
                 ))}
                 <li>
                   <Link
-                    href="https://econtador.alterdata.com.br/"
+                    href={CLIENT_AREA_URL}
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="text-gray-300 hover:text-secondary transition-colors flex items-center gap-2 group"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-secondary/50 group-hover:bg-secondary transition-colors" />
@@ -101,18 +103,19 @@ export default function Footer() {
               <h3 className="text-lg font-bold mb-6 text-white border-b border-white/10 pb-2 inline-block">Conecte-se</h3>
               <div className="flex space-x-4 mb-6">
                 {[
-                  { icon: FaInstagram, href: "https://www.instagram.com/gcdigicont" },
-                  { icon: FaFacebook, href: "https://www.facebook.com/gcdigicont" },
-                  { icon: FaLinkedin, href: "https://www.linkedin.com/company/gcdigicont" },
+                  { icon: FaInstagram, href: socialLinks.instagram, label: "Instagram da GCDIGICONT" },
+                  { icon: FaFacebook, href: socialLinks.facebook, label: "Facebook da GCDIGICONT" },
+                  { icon: FaLinkedin, href: socialLinks.linkedin, label: "LinkedIn da GCDIGICONT" },
                 ].map((social, index) => (
                   <a
                     key={index}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={social.label}
                     className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-secondary hover:text-white transition-all duration-300 hover:-translate-y-1 shadow-lg"
                   >
-                    <social.icon className="w-5 h-5" />
+                    <social.icon className="w-5 h-5" aria-hidden="true" />
                   </a>
                 ))}
               </div>

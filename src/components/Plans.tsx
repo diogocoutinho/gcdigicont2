@@ -4,122 +4,16 @@ import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import { useState, Fragment } from "react";
 import ScrollReveal from "./ScrollReveal";
 import { m, AnimatePresence } from "framer-motion";
+import {
+  plans,
+  planCategories,
+  additionalServices,
+  citiesServed,
+  type PlanCategory,
+} from "@/data/site";
+import { smoothScroll } from "@/utils/smoothScroll";
 
-type Category = {
-  name: string;
-  features: {
-    label: string;
-    values: (boolean | string)[];
-    note?: string;
-  }[];
-};
-
-const plans = [
-  {
-    name: "MEI",
-    description: "Micro Empreendedor Individual",
-  },
-  {
-    name: "Simples Nacional",
-    description: "Empresas do Simples Nacional",
-  },
-  {
-    name: "Lucro Presumido",
-    description: "Empresas de Lucro Presumido",
-  },
-  {
-    name: "Construção Civil",
-    description: "Empresas da Construção Civil",
-  },
-];
-
-const categories: Category[] = [
-  {
-    name: "Processos Iniciais",
-    features: [
-      {
-        label:
-          "Contabilidade Completa: Todas as obrigações Contábeis e Legais com a Receita Federal, Estadual e Municipal",
-        values: [true, true, true, true],
-      },
-    ],
-  },
-  {
-    name: "Folha de Pagamento",
-    features: [
-      {
-        label: "Pró Labore dos Sócios / Folha de Pagamento",
-        values: ["", "Até 2*", "Até 2*", "Até 2*"],
-        note: "2 Sócios ou 1 Sócio e 1 Funcionário - Acima disso será cobrado R$ 29,90 por integrante extra",
-      },
-    ],
-  },
-  {
-    name: "Processos de Abertura",
-    features: [
-      {
-        label: "Processo de Abertura Grátis",
-        values: [true, true, true, true],
-        note: " Realizamos o processo de abertura gratuitamente, você paga apenas as taxas do governo e realiza os protocolos físicos. Indicamos o melhor regime tributário e atividades e você recebe a documentação de abertura via Correios ou WhatsApp dependendo do Município. A abertura sem sair de casa está disponível em Consulta Cidades que Atendemos abaixo. (Gratuidade para contrato de planos mínimo de 24 meses)",
-      },
-    ],
-  },
-  {
-    name: "Faturamento",
-    features: [
-      {
-        label: "Faturamento",
-        values: [
-          "Ideal até R$ 6.750,00 mês",
-          "Ideal até R$ 50.000,00 mês*",
-          "Ideal até R$ 50.000,00 mês*",
-          "Ideal até R$ 50.000,00 mês*",
-        ],
-        note: "* valores acima consulte um consultor pelos canais de Contato",
-      },
-    ],
-  },
-  {
-    name: "Pessoa Física",
-    features: [
-      {
-        label: "Serviços Pessoa Física",
-        values: [
-          "Consultar tabela de Serviços abaixo",
-          "Consultar tabela de Serviços abaixo",
-          "Consultar tabela de Serviços abaixo",
-          "Consultar tabela de Serviços abaixo",
-        ],
-      },
-    ],
-  },
-];
-
-const additionalServices = [
-  { name: "IRPF (Imposto de renda pessoa física)" },
-  { name: "Alteração Contratual (EI e LTDA)" },
-  { name: "Alteração de Natureza Jurídica" },
-  { name: "Preenchimento de Alvará" },
-  { name: "Baixa MEI" },
-  { name: "Taxa de Reprocessamento (em qualquer alteração ou constituição)" },
-  { name: "Ativação de Inscrição Estadual" },
-  { name: "Baixa empresa Lucro Presumido" },
-  { name: "Baixa empresa Simples Nacional" },
-  { name: "Declaração de Faturamento" },
-  { name: "Autenticação de Livros na Junta" },
-  { name: "Reemissão de Guias (impostos e outros)" },
-  { name: "Formulários Diversos (bancos, fornecedores, etc)" },
-  { name: "Parcelamento de Impostos" },
-  { name: "Rescisão e Admissão de Funcionários" },
-  { name: "Verificação de Pendências" },
-  { name: "Migração de MEI para ME" },
-  { name: "Retificação (DAS)" },
-  { name: "Retificação de impostos" },
-  { name: "Registro de marca" },
-  { name: "LTCAT" },
-  { name: "Certificado digital PF" },
-  { name: "Certificado digital PJ" },
-];
+const categories: PlanCategory[] = planCategories;
 
 function renderCell(value: boolean | string | undefined) {
   if (value === true)
@@ -147,10 +41,20 @@ function FeatureLabelWithNote({
           className="ml-1 text-secondary cursor-pointer relative"
           onMouseEnter={() => setShow(true)}
           onMouseLeave={() => setShow(false)}
+          onFocus={() => setShow(true)}
+          onBlur={() => setShow(false)}
+          onClick={() => setShow((v) => !v)}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") setShow(false);
+          }}
+          tabIndex={0}
+          role="button"
+          aria-label={`Mais informações: ${label}`}
+          aria-expanded={show}
         >
           <FaInfoCircle className="inline-block w-4 h-4 align-middle" />
           {show && (
-            <span className="absolute left-6 top-1/2 z-50 -translate-y-1/2 bg-gray-900 text-white text-sm rounded px-3 py-2 shadow-lg max-w-xs whitespace-normal break-words min-w-80">
+            <span role="tooltip" className="absolute left-6 top-1/2 z-50 -translate-y-1/2 bg-gray-900 text-white text-sm rounded px-3 py-2 shadow-lg max-w-xs whitespace-normal break-words min-w-80">
               {note}
             </span>
           )}
@@ -162,15 +66,7 @@ function FeatureLabelWithNote({
 
 export default function Plans() {
   const [showAdditional, setShowAdditional] = useState(false);
-  const cidades = [
-    "Belo Horizonte",
-    "Contagem",
-    "Betim",
-    "Ibirité",
-    "Ribeirão das Neves",
-    "Igarapé",
-    "Bom Despacho"
-  ];
+  const cidades = citiesServed;
 
   return (
     <section
@@ -205,6 +101,8 @@ export default function Plans() {
                         {plan.description}
                       </div>
                       <m.button
+                        type="button"
+                        onClick={() => smoothScroll("contato")}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="w-full py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 bg-secondary text-white shadow-md hover:shadow-lg hover:bg-secondary/90"
@@ -226,10 +124,9 @@ export default function Plans() {
                         {cat.name}
                       </td>
                     </tr>
-                    {cat.features.map((feature, idx) => (
+                    {cat.features.map((feature) => (
                       <tr
                         key={feature.label}
-                        id={idx.toString()}
                         className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors group"
                       >
                         <td className="text-left px-6 py-4 text-gray-700 text-sm font-medium border-r border-gray-100">
@@ -256,7 +153,9 @@ export default function Plans() {
         <ScrollReveal delay={0.4} width="100%">
           <div className="mt-16 text-center">
             <button
+              type="button"
               onClick={() => setShowAdditional(!showAdditional)}
+              aria-expanded={showAdditional}
               className="group inline-flex items-center text-2xl font-bold text-light mb-4 focus:outline-none hover:text-secondary transition-colors"
             >
               Serviços Adicionais
@@ -280,7 +179,7 @@ export default function Plans() {
                       {additionalServices.map((service, index) => (
                         <div key={index} className="flex items-center py-2 border-b border-gray-50 hover:bg-gray-50 px-2 rounded-lg transition-colors group">
                           <div className="w-1.5 h-1.5 rounded-full bg-secondary/50 group-hover:bg-secondary transition-colors shrink-0 mr-3" />
-                          <span className="text-sm font-medium text-gray-700">{service.name}</span>
+                          <span className="text-sm font-medium text-gray-700">{service}</span>
                         </div>
                       ))}
                     </div>

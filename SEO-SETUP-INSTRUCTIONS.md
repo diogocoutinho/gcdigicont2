@@ -1,5 +1,7 @@
 # SEO Setup Instructions
 
+> **Atualização (out/2026):** parte deste guia está desatualizada. Metadados, canonical por página, JSON-LD, sitemap, robots (com robôs de IA), llms.txt, aviso de cookies e o número do botão flutuante de WhatsApp agora vêm de `src/data/site.ts` e `src/lib/`. A variável `NEXT_PUBLIC_WHATSAPP_BUTTON_NUMBER` não é mais usada. Os favicons listados no item 1 não são necessários (o manifest usa os ícones existentes).
+
 This document outlines the steps needed to complete the SEO optimization for GCDIGICONT.
 
 ## ✅ Completed Automatically

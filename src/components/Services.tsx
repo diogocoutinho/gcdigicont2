@@ -9,39 +9,11 @@ import {
 } from "react-icons/fa";
 import ScrollReveal from "./ScrollReveal";
 import { m } from "framer-motion";
+import { services as servicesData } from "@/data/site";
 
-const services = [
-  {
-    title: "Contabilidade",
-    description:
-      "Informações contábeis que auxiliam as tomadas de decisões da sua empresa de forma personalizada e dinâmica. Incluindo balancetes mensais, balanço patrimonial e demonstração de resultado do exercício.",
-    icon: FaCalculator,
-  },
-  {
-    title: "Consultoria",
-    description:
-      "Planejamento tributário especializado, restituição e compensação de impostos, além de defesa administrativa de autos de infração e regularidade fiscal.",
-    icon: FaUserTie,
-  },
-  {
-    title: "Folha de Pagamento",
-    description:
-      "Gestão completa da folha de pagamento, incluindo registros dos profissionais, elaboração de informações para o Ministério do Trabalho e assessoria trabalhista e previdenciária.",
-    icon: FaUsers,
-  },
-  {
-    title: "Fiscal",
-    description:
-      "Apuração de impostos e elaborações de declarações acessórias com precisão e pontualidade.",
-    icon: FaFileInvoiceDollar,
-  },
-  {
-    title: "Legalização",
-    description:
-      "Constituição e distrato de sociedades, registros de livros societários fiscais e contábeis, e regularização de situação fiscal junto aos órgãos federais, estaduais e municipais.",
-    icon: FaBuilding,
-  },
-];
+// Ícones na mesma ordem de `services` (src/data/site.ts).
+const icons = [FaCalculator, FaUserTie, FaUsers, FaFileInvoiceDollar, FaBuilding];
+const services = servicesData.map((s, i) => ({ ...s, icon: icons[i] }));
 
 export default function Services() {
   return (

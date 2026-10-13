@@ -24,7 +24,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <div className="animate-hero-zoom relative w-full h-full">
           <Image
-            src="/hero-bg.jpg"
+            src="/hero-bg.webp"
             alt="Profissionais GCDIGICONT"
             fill
             className="object-cover"
@@ -62,7 +62,6 @@ export default function Hero() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-secondary text-primary px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-secondary/30 transition-all text-center"
-                  aria-label="Entre em contato com a GCDIGICONT"
                 >
                   Fale Conosco
                 </m.a>
@@ -72,7 +71,6 @@ export default function Hero() {
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
                   whileTap={{ scale: 0.95 }}
                   className="glass text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all text-center flex items-center justify-center gap-2"
-                  aria-label="Conheça nossos serviços de contabilidade"
                 >
                   Nossos Serviços
                 </m.a>

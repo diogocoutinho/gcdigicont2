@@ -4,6 +4,8 @@ import { useState } from "react";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
 import ScrollReveal from "./ScrollReveal";
 import { m } from "framer-motion";
+import { contact, whatsappLink } from "@/data/site";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -39,6 +41,10 @@ export default function Contact() {
       );
 
       if (result.status === 200) {
+        trackEvent("generate_lead", {
+          form_name: "contato",
+          method: "formulario",
+        });
         setSubmitStatus({
           type: "success",
           message:
@@ -101,8 +107,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-light mb-1">E-mail</h3>
-                  <a href="mailto:contato@gcdigicont.com.br" className="text-gray-600 hover:text-secondary transition-colors">
-                    contato@gcdigicont.com.br
+                  <a href={`mailto:${contact.email}`} className="text-gray-600 hover:text-secondary transition-colors">
+                    {contact.email}
                   </a>
                 </div>
               </m.div>
@@ -120,8 +126,19 @@ export default function Contact() {
                   <h3 className="text-lg font-bold text-light mb-1">
                     WhatsApp Comercial
                   </h3>
-                  <a href="https://wa.me/5531993602476" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-secondary transition-colors">
-                    +55 (31) 99360-2476
+                  <a
+                    href={whatsappLink(contact.whatsappComercial.waNumber)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("whatsapp_click", {
+                        link_location: "contato",
+                        whatsapp_line: "comercial",
+                      })
+                    }
+                    className="text-gray-600 hover:text-secondary transition-colors"
+                  >
+                    {contact.whatsappComercial.display}
                   </a>
                 </div>
               </m.div>
@@ -139,8 +156,19 @@ export default function Contact() {
                   <h3 className="text-lg font-bold text-light mb-1">
                     WhatsApp Suporte
                   </h3>
-                  <a href="https://wa.me/5531987529716" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-secondary transition-colors">
-                    +55 (31) 98752-9716
+                  <a
+                    href={whatsappLink(contact.whatsappSuporte.waNumber)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("whatsapp_click", {
+                        link_location: "contato",
+                        whatsapp_line: "suporte",
+                      })
+                    }
+                    className="text-gray-600 hover:text-secondary transition-colors"
+                  >
+                    {contact.whatsappSuporte.display}
                   </a>
                 </div>
               </m.div>

@@ -1,28 +1,13 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from "next";
+import { CONTENT_UPDATED_AT, SITE_URL, pages } from "@/data/site";
 
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://gcdigicont.com.br';
-
-    return [
-        {
-            url: baseUrl,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 1,
-        },
-        {
-            url: `${baseUrl}/privacidade`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-        {
-            url: `${baseUrl}/termos`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-    ];
+  return pages.map((page) => ({
+    url: `${SITE_URL}${page.path}`,
+    lastModified: CONTENT_UPDATED_AT,
+    changeFrequency: page.changeFrequency,
+    priority: page.priority,
+  }));
 }
