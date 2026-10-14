@@ -34,7 +34,6 @@ export default function Partners() {
                 width={200}
                 height={200}
                 className="object-contain h-32 w-auto grayscale hover:grayscale-0 transition-all duration-300"
-                priority
               />
             </a>
           </div>

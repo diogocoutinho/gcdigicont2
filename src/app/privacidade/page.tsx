@@ -2,6 +2,7 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { openCookieBanner } from "@/lib/analytics";
 
 export default function PrivacyPolicy() {
   return (
@@ -102,6 +103,32 @@ export default function PrivacyPolicy() {
                 Reservamos o direito de modificar esta política a qualquer
                 momento. Alterações significativas serão comunicadas através de
                 nossos canais oficiais.
+              </p>
+            </section>
+
+            <section className="mb-8">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                8. Cookies e Ferramentas de Análise
+              </h2>
+              <p className="text-gray-700 mb-4">
+                Com a sua permissão, usamos o Google Analytics para medir de
+                forma estatística como o site é utilizado (páginas visitadas,
+                cliques em contato e envios do formulário). Esses cookies só
+                são ativados se você clicar em &quot;Aceitar&quot; no aviso de
+                cookies, e você pode mudar sua escolha a qualquer momento{" "}
+                <button
+                  type="button"
+                  onClick={openCookieBanner}
+                  className="text-secondary underline"
+                >
+                  clicando aqui
+                </button>
+                .
+              </p>
+              <p className="text-gray-700 mb-4">
+                As mensagens enviadas pelo formulário de contato são
+                encaminhadas por e-mail por meio do serviço EmailJS, apenas
+                para que possamos responder ao seu contato.
               </p>
             </section>
           </div>

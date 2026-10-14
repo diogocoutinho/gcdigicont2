@@ -12,12 +12,11 @@ export default function About() {
             <div className="relative w-full flex justify-center items-center group">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/about.png"
+                  src="/about.webp"
                   alt="Equipe GCDIGICONT"
                   width={600}
                   height={750} // 4:5 aspect ratio roughly
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
               </div>

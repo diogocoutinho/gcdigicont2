@@ -1,16 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { smoothScroll } from "@/utils/smoothScroll";
 import { m, AnimatePresence } from "framer-motion";
+import { CLIENT_AREA_URL } from "@/data/site";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  // Rolagem pedida pelo menu móvel: só acontece depois que o menu termina de
+  // fechar, porque a animação de fechamento do framer-motion restaurava a
+  // posição da página e cancelava a rolagem (os links do menu móvel não
+  // levavam a lugar nenhum).
+  const pendingScroll = useRef<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,12 +34,17 @@ export default function Header() {
     e.preventDefault();
 
     if (pathname !== "/") {
-      window.location.href = `/#${targetId}`;
+      window.location.assign(`/#${targetId}`);
+      return;
+    }
+
+    if (isMenuOpen) {
+      pendingScroll.current = targetId;
+      setIsMenuOpen(false);
       return;
     }
 
     smoothScroll(targetId);
-    setIsMenuOpen(false);
   };
 
   const handleNavigation = (
@@ -44,7 +55,7 @@ export default function Header() {
     if (pathname === "/") {
       handleScroll(e, targetId);
     } else {
-      window.location.href = `/#${targetId}`;
+      window.location.assign(`/#${targetId}`);
     }
   };
 
@@ -65,6 +76,7 @@ export default function Header() {
                 width={220}
                 height={60}
                 className="h-10 w-auto"
+                priority
               />
             </Link>
           </div>
@@ -111,9 +123,10 @@ export default function Header() {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                href="https://econtador.alterdata.com.br/"
+                href={CLIENT_AREA_URL}
                 className="text-primary text-center bg-secondary hover:bg-white hover:text-secondary shadow-lg py-2.5 px-6 rounded-lg font-bold text-sm transition-all duration-300 border-2 border-secondary"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Área do Cliente
               </Link>
@@ -126,6 +139,8 @@ export default function Header() {
               type="button"
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-expanded={isMenuOpen}
+              aria-controls="menu-mobile"
             >
               <span className="sr-only">Abrir menu principal</span>
               {!isMenuOpen ? (
@@ -163,13 +178,21 @@ export default function Header() {
       </nav>
 
       {/* Mobile menu */}
-      <AnimatePresence>
+      <AnimatePresence
+        onExitComplete={() => {
+          if (pendingScroll.current) {
+            smoothScroll(pendingScroll.current);
+            pendingScroll.current = null;
+          }
+        }}
+      >
         {isMenuOpen && (
           <m.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
+            id="menu-mobile"
             className="sm:hidden glass-strong border-t border-white/10"
           >
             <div className="pt-2 pb-6 space-y-1 px-4">
@@ -210,10 +233,11 @@ export default function Header() {
               </a>
               <div className="pt-4">
                 <Link
-                  href="https://econtador.alterdata.com.br/"
+                  href={CLIENT_AREA_URL}
                   className="block w-full text-center text-primary bg-secondary hover:bg-secondary/90 py-3 px-6 rounded-lg font-bold text-base transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Área do Cliente
                 </Link>

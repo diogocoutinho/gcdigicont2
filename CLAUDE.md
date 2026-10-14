@@ -4,25 +4,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a static marketing website for GC Digicont, an accounting firm in Belo Horizonte, Brazil. Built with Next.js 15.3.1 and React 19, it exports as a fully static site deployed to Hostinger.
+This is a static marketing website for GC Digicont, an accounting firm in Belo Horizonte, Brazil. Built with Next.js 16 and React 19, it exports as a fully static site deployed to Hostinger.
 
 ## Development Commands
 
 ```bash
 # Start development server with Turbopack (http://localhost:3000)
-yarn dev
+npm run dev
 
 # Build static export to /out directory
-yarn build
+npm run build
 
-# Run ESLint
-yarn lint
+# Run ESLint (flat config, eslint .)
+npm run lint
 
-# Start production server (rarely used, as deployment is static export)
-yarn start
+# Notify IndexNow (Bing etc.) after a deploy (also runs in the deploy workflow)
+npm run indexnow
 ```
 
-**Important:** This project uses Yarn 1.22.22 as the package manager, not npm.
+**Important:** This project uses npm (`package-lock.json`). Dependency versions are pinned; the deploy runs `npm ci`.
 
 ## Architecture
 
@@ -69,7 +69,7 @@ The contact form uses EmailJS (client-side email service):
 
 ### Styling
 
-**Tailwind CSS 4.1.5** with custom theme in `src/app/globals.css`:
+**Tailwind CSS 4** with custom theme in `src/app/globals.css`:
 ```css
 --background: #0e2b3a (dark blue background)
 --primary: #ffffff (white text)
@@ -81,9 +81,9 @@ Responsive design follows mobile-first approach with standard Tailwind breakpoin
 
 ### SEO & Analytics
 
-- Google Analytics 4 integrated via `@next/third-parties` with ID `G-YKE4ERKDJP`
-- Rich metadata in `layout.tsx` includes Open Graph and Twitter Card tags
-- `sitemap.xml` and `robots.txt` in `/public`
+- Site data (contacts, services, plans, cities, pages) lives in `src/data/site.ts` and feeds the components, metadata (`src/lib/seo.ts`), JSON-LD (`src/lib/structuredData.ts`), `sitemap.ts`, `robots.ts` and `/llms.txt` + `/llms-full.txt` (`src/lib/llms.ts`). Update content there.
+- Google Analytics 4 (`G-YKE4ERKDJP`) loads only after cookie consent (`src/lib/analytics.ts`, `src/components/CookieConsent.tsx`). Events: `whatsapp_click`, `generate_lead`.
+- `public/.htaccess` (cache, compression, security headers, www redirect) and the IndexNow key file in `public/` are exported with the site.
 - Portuguese (pt-BR) language
 
 ## Deployment
@@ -92,7 +92,7 @@ Responsive design follows mobile-first approach with standard Tailwind breakpoin
 
 Automatic deployment on push to `main` branch:
 1. Node.js 22 setup
-2. Install dependencies with npm (workflow uses npm despite Yarn in local dev)
+2. Install dependencies with `npm ci`
 3. Build with environment variables from GitHub Secrets
 4. Deploy `/out` directory to Hostinger via SCP
 
@@ -111,7 +111,7 @@ HOSTINGER_DEPLOY_PATH
 
 ### Local Environment Variables
 
-While the `.env` file exists in the repository (security concern), environment variables for local development should include:
+Environment variables for local development (`.env.local`, git-ignored):
 ```
 NEXT_PUBLIC_EMAILJS_SERVICE_ID=service_e04ifg6
 NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=template_o845blv
@@ -120,10 +120,10 @@ NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
 
 ## Key Dependencies
 
-- `@next/third-parties@15.3.1` - Google Analytics integration
-- `@emailjs/browser@4.4.1` - Contact form email service
-- `react-icons@5.5.0` - FontAwesome icons
-- `tailwindcss@4.1.5` - Utility-first CSS framework
+- `@emailjs/browser` - Contact form email service
+- `framer-motion` - Animations
+- `react-icons` - FontAwesome icons
+- `tailwindcss` 4 - Utility-first CSS framework
 
 ## Important Notes
 
@@ -133,13 +133,12 @@ No testing framework is configured. If adding tests, consider:
 - Playwright for E2E tests of the contact form and navigation
 
 ### Content Updates
-Service offerings, pricing plans, and partner logos are hard-coded in components. To update:
-- **Services:** Edit the services array in `src/components/Services.tsx`
-- **Plans:** Edit the plans array in `src/components/Plans.tsx`
+Service offerings, plans, cities and contacts are in `src/data/site.ts`. To update:
+- **Services / Plans / Cities / Contacts:** Edit `src/data/site.ts` (also updates JSON-LD and llms.txt)
 - **Partners:** Replace logo images in `/public` and update `src/components/Partners.tsx`
 
 ### Image Requirements
-- Hero background: `/public/hero-bg.jpg` (optimized for web)
+- Hero background: `/public/hero-bg.webp` (optimized for web)
 - About image: `/public/about.webp` (WebP format)
 - Logos: `/public/logo.png` (light) and `/public/logo-dark.png` (dark mode)
 - Partner logos stored in `/public`
@@ -149,7 +148,7 @@ Service offerings, pricing plans, and partner logos are hard-coded in components
 2. No 404 page configured
 3. No error boundaries implemented
 4. Form validation is basic HTML5 only
-5. `.env` file committed to repository (should be in `.gitignore`)
+5. `.env*` files are git-ignored; never commit them
 
 ### Path Aliases
 TypeScript configured with `@/*` alias mapping to `./src/*`:

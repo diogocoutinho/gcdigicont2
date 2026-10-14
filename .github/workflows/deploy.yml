@@ -14,27 +14,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: "npm"
 
+      # npm ci instala exatamente as versões do package-lock.json (as testadas)
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
         run: npm run build
-        env:
-          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
-          NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}
-          NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}
-          NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
 
       - name: Deploy to Hostinger
-        uses: appleboy/scp-action@master
+        uses: appleboy/scp-action@v1.0.0
         with:
           host: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USERNAME }}
@@ -43,3 +39,9 @@ jobs:
           source: "out/*"
           target: ${{ secrets.HOSTINGER_DEPLOY_PATH }}
           strip_components: 1
+
+      # Avisa Bing e demais buscadores do IndexNow sobre a nova publicação.
+      # Não interrompe o deploy se o serviço estiver fora do ar.
+      - name: Ping IndexNow
+        continue-on-error: true
+        run: npm run indexnow

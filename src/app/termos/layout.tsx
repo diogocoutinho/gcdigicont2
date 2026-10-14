@@ -1,23 +1,21 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { jsonLd, pageGraph } from "@/lib/structuredData";
 
-export const metadata: Metadata = {
-  title: "Termos de Uso - GCDIGICONT",
-  description:
-    "Termos e Condições de Uso dos serviços da GCDIGICONT. Conheça as regras e diretrizes para utilização dos nossos serviços contábeis.",
-  robots: "index, follow",
-  openGraph: {
-    title: "Termos de Uso - GCDIGICONT",
-    description:
-      "Termos e Condições de Uso dos serviços contábeis da GCDIGICONT.",
-    url: "https://gcdigicont.com.br/termos",
-    type: "website",
-  },
-};
+export const metadata: Metadata = pageMetadata("/termos/");
 
 export default function TermosLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(pageGraph("/termos/")) }}
+      />
+      {children}
+    </>
+  );
 }
