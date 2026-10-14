@@ -1,7 +1,7 @@
 // Medição com consentimento (LGPD): o Google Analytics só é carregado depois
 // que o visitante aceita os cookies no aviso. Antes disso nenhum script de
 // medição é baixado e nenhum evento é enviado.
-import { GA_MEASUREMENT_ID } from "@/data/site";
+import { GA_DESTINATIONS, GA_TAG_ID } from "@/data/site";
 
 export type ConsentValue = "granted" | "denied";
 
@@ -53,7 +53,7 @@ export function loadAnalytics() {
   if (loaded || typeof window === "undefined") return;
   loaded = true;
   // Desfaz um eventual opt-out anterior nesta mesma visita.
-  (window as unknown as Record<string, unknown>)[`ga-disable-${GA_MEASUREMENT_ID}`] = false;
+  for (const id of GA_DESTINATIONS) (window as unknown as Record<string, unknown>)[`ga-disable-${id}`] = false;
 
   window.dataLayer = window.dataLayer || [];
   window.gtag = function gtag() {
@@ -61,16 +61,16 @@ export function loadAnalytics() {
     window.dataLayer!.push(arguments);
   };
   window.gtag("js", new Date());
-  window.gtag("config", GA_MEASUREMENT_ID);
+  window.gtag("config", GA_TAG_ID);
 
   const s = document.createElement("script");
   s.async = true;
-  s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+  s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_TAG_ID}`;
   document.head.appendChild(s);
 }
 
 function disableAnalytics() {
-  (window as unknown as Record<string, unknown>)[`ga-disable-${GA_MEASUREMENT_ID}`] = true;
+  for (const id of GA_DESTINATIONS) (window as unknown as Record<string, unknown>)[`ga-disable-${id}`] = true;
   // Remove os cookies _ga* do domínio, caso existam de um aceite anterior.
   try {
     const host = window.location.hostname.replace(/^www\./, "");

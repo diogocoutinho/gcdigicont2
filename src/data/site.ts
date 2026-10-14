@@ -23,7 +23,14 @@ export const OG_IMAGE = {
   alt: "GCDIGICONT - Contabilidade Digital",
 };
 
-export const GA_MEASUREMENT_ID = "G-YKE4ERKDJP";
+/**
+ * Google Analytics. O fluxo da propriedade GCDIGICONT (G-YKE4ERKDJP) está combinado na tag do Google "GCDigiCont"
+ * (G-SY4G9E0XZY), e o Google só serve o gtag.js pelo ID da tag: carregar com G-YKE4ERKDJP dá 404 e nada é medido.
+ * O gtag carrega e configura a tag; ela entrega os dados aos destinos configurados no Analytics.
+ */
+export const GA_TAG_ID = "G-SY4G9E0XZY";
+/** Destinos da tag (para o opt-out por ID). */
+export const GA_DESTINATIONS = [GA_TAG_ID, "G-YKE4ERKDJP"] as const;
 
 export const contact = {
   email: "contato@gcdigicont.com.br",

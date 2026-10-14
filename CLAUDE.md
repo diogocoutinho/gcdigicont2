@@ -87,7 +87,7 @@ Responsive design follows mobile-first approach with standard Tailwind breakpoin
 ### SEO & Analytics
 
 - Site data (contacts, services, plans, cities, pages) lives in `src/data/site.ts` and feeds the components, metadata (`src/lib/seo.ts`), JSON-LD (`src/lib/structuredData.ts`), `sitemap.ts`, `robots.ts` and `/llms.txt` + `/llms-full.txt` (`src/lib/llms.ts`). Update content there.
-- Google Analytics 4 (`G-YKE4ERKDJP`) loads only after cookie consent (`src/lib/analytics.ts`, `src/components/CookieConsent.tsx`). Events: `whatsapp_click`, `generate_lead`.
+- Google Analytics 4: gtag.js is loaded with the Google tag ID `G-SY4G9E0XZY` (the GCDIGICONT stream `G-YKE4ERKDJP` is a destination of that tag; loading by `G-YKE4ERKDJP` returns 404). It loads only after cookie consent (`src/lib/analytics.ts`, `src/components/CookieConsent.tsx`). Events: `whatsapp_click`, `generate_lead`.
 - `public/.htaccess` (cache, compression, security headers, www redirect) and the IndexNow key file in `public/` are exported with the site.
 - Portuguese (pt-BR) language
 
