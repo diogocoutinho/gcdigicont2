@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { smoothScroll } from "@/utils/smoothScroll";
 import ScrollReveal from "./ScrollReveal";
 import { CLIENT_AREA_URL, socialLinks } from "@/data/site";
@@ -105,7 +105,6 @@ export default function Footer() {
                 {[
                   { icon: FaInstagram, href: socialLinks.instagram, label: "Instagram da GCDIGICONT" },
                   { icon: FaFacebook, href: socialLinks.facebook, label: "Facebook da GCDIGICONT" },
-                  { icon: FaLinkedin, href: socialLinks.linkedin, label: "LinkedIn da GCDIGICONT" },
                 ].map((social, index) => (
                   <a
                     key={index}

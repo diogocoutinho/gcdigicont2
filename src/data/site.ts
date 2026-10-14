@@ -49,7 +49,7 @@ export const CLIENT_AREA_URL = "https://econtador.alterdata.com.br/";
 export const socialLinks = {
   instagram: "https://www.instagram.com/gcdigicont",
   facebook: "https://www.facebook.com/gcdigicont",
-  linkedin: "https://www.linkedin.com/company/gcdigicont",
+  // LinkedIn removido em out/2026 a pedido do Diogo (a página respondia 404).
 };
 
 export const services = [
