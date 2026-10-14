@@ -11,7 +11,9 @@ import {
   services,
   plans,
   citiesServed,
+  faq,
   pages,
+  serviceBySlug,
 } from "@/data/site";
 
 const ORG_ID = `${SITE_URL}/#organization`;
@@ -71,6 +73,7 @@ export function organizationGraph() {
               "@type": "Service",
               name: s.title,
               description: s.description,
+              url: `${SITE_URL}/servicos/${s.slug}/`,
               provider: { "@id": ORG_ID },
             },
           })),
@@ -115,14 +118,59 @@ export function pageGraph(path: string) {
       ...(page.path !== "/" && { breadcrumb: { "@id": `${url}#breadcrumb` } }),
     },
   ];
+  const service = page.path.startsWith("/servicos/")
+    ? serviceBySlug(page.path.split("/")[2])
+    : undefined;
   if (page.path !== "/") {
+    const crumbs = service
+      ? [
+          { name: "Início", item: `${SITE_URL}/` },
+          { name: "Serviços", item: `${SITE_URL}/#servicos` },
+          { name: service.title, item: url },
+        ]
+      : [
+          { name: "Início", item: `${SITE_URL}/` },
+          { name: page.title.split(" - ")[0], item: url },
+        ];
     nodes.push({
       "@type": "BreadcrumbList",
       "@id": `${url}#breadcrumb`,
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Início", item: `${SITE_URL}/` },
-        { "@type": "ListItem", position: 2, name: page.title.split(" - ")[0], item: url },
-      ],
+      itemListElement: crumbs.map((c, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        ...c,
+      })),
+    });
+  }
+  if (service) {
+    nodes.push({
+      "@type": "Service",
+      "@id": `${url}#service`,
+      name: service.title,
+      serviceType: service.title,
+      description: service.description,
+      url,
+      provider: { "@id": ORG_ID },
+      areaServed: citiesServed.map((name) => ({
+        "@type": "City",
+        name,
+        containedInPlace: { "@type": "State", name: "Minas Gerais" },
+      })),
+      audience: { "@type": "Audience", audienceType: service.audience.join("; ") },
+    });
+    (nodes[0] as Record<string, unknown>).mainEntity = { "@id": `${url}#service` };
+  }
+  // FAQPage só na home, onde as perguntas estão visíveis.
+  if (page.path === "/") {
+    nodes.push({
+      "@type": "FAQPage",
+      "@id": `${url}#faq`,
+      inLanguage: "pt-BR",
+      mainEntity: faq.map((q) => ({
+        "@type": "Question",
+        name: q.question,
+        acceptedAnswer: { "@type": "Answer", text: q.answer },
+      })),
     });
   }
   return nodes;

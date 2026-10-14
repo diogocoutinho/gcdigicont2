@@ -102,7 +102,7 @@ export default function Contact() {
                 whileHover={{ y: -5 }}
                 className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-center gap-6 group hover:border-secondary/30 transition-all"
               >
-                <div className="bg-secondary/10 p-4 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                <div className="bg-secondary/10 p-4 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-background transition-colors duration-300 shrink-0">
                   <FaEnvelope className="w-6 h-6" />
                 </div>
                 <div>
@@ -119,7 +119,7 @@ export default function Contact() {
                 whileHover={{ y: -5 }}
                 className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-center gap-6 group hover:border-secondary/30 transition-all"
               >
-                <div className="bg-secondary/10 p-4 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                <div className="bg-secondary/10 p-4 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-background transition-colors duration-300 shrink-0">
                   <FaWhatsapp className="w-6 h-6" />
                 </div>
                 <div>
@@ -149,7 +149,7 @@ export default function Contact() {
                 whileHover={{ y: -5 }}
                 className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-center gap-6 group hover:border-secondary/30 transition-all"
               >
-                <div className="bg-secondary/10 p-4 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                <div className="bg-secondary/10 p-4 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-background transition-colors duration-300 shrink-0">
                   <FaWhatsapp className="w-6 h-6" />
                 </div>
                 <div>
@@ -283,7 +283,7 @@ export default function Contact() {
                 whileTap={{ scale: 0.98 }}
                 className={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-200 shadow-lg ${isSubmitting
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none"
-                  : "bg-secondary text-white hover:bg-secondary/90 hover:shadow-secondary/30"
+                  : "bg-secondary text-background hover:bg-secondary/90 hover:shadow-secondary/30"
                   }`}
               >
                 {isSubmitting ? "Enviando..." : "Enviar Mensagem"}

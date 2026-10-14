@@ -12,6 +12,7 @@ import {
   planCategories,
   additionalServices,
   citiesServed,
+  faq,
   pages,
 } from "@/data/site";
 
@@ -45,11 +46,13 @@ export function llmsTxt() {
     "## Páginas",
     "",
     ...pages.map((p) => `- [${p.title}](${SITE_URL}${p.path}): ${p.description}`),
-    `- [Conteúdo completo em texto](${SITE_URL}/llms-full.txt): serviços, planos, serviços avulsos e cidades atendidas`,
+    `- [Conteúdo completo em texto](${SITE_URL}/llms-full.txt): serviços, planos, serviços avulsos, cidades atendidas e perguntas frequentes`,
     "",
     "## Serviços",
     "",
-    ...services.map((s) => `- ${s.title}: ${s.description}`),
+    ...services.map(
+      (s) => `- [${s.title}](${SITE_URL}/servicos/${s.slug}/): ${s.description}`
+    ),
     "",
     "## Planos",
     "",
@@ -89,7 +92,21 @@ export function llmsFullTxt() {
     "",
     "## Serviços",
     "",
-    ...services.flatMap((s) => [`### ${s.title}`, "", s.description, ""]),
+    ...services.flatMap((s) => [
+      `### ${s.title}`,
+      "",
+      `Página: ${SITE_URL}/servicos/${s.slug}/`,
+      "",
+      s.description,
+      "",
+      ...s.details.map((d) => `- ${d.title}: ${d.text}`),
+      "",
+      `Para quem: ${s.audience.join("; ")}.`,
+      "",
+      ...(s.relatedExtras.length
+        ? [`Serviços avulsos relacionados: ${s.relatedExtras.join("; ")}.`, ""]
+        : []),
+    ]),
     "Atendimento exclusivo: disponível por e-mail, telefone ou WhatsApp. Fale diretamente com seu contador.",
     "",
     "## Planos",
@@ -109,6 +126,9 @@ export function llmsFullTxt() {
     "",
     ...citiesServed.map((c) => `- ${c} (MG)`),
     "",
+    "## Perguntas frequentes",
+    "",
+    ...faq.flatMap((q) => [`### ${q.question}`, "", q.answer, ""]),
     ...contactLines(),
     "## Páginas",
     "",
