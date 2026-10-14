@@ -105,7 +105,7 @@ export default function Plans() {
                         onClick={() => smoothScroll("contato")}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="w-full py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 bg-secondary text-white shadow-md hover:shadow-lg hover:bg-secondary/90"
+                        className="w-full py-3 px-4 rounded-xl font-bold text-sm transition-all duration-300 bg-secondary text-background shadow-md hover:shadow-lg hover:bg-secondary/90"
                       >
                         Contratar
                       </m.button>

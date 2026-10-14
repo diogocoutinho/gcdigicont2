@@ -124,7 +124,7 @@ export default function Header() {
             >
               <Link
                 href={CLIENT_AREA_URL}
-                className="text-primary text-center bg-secondary hover:bg-white hover:text-secondary shadow-lg py-2.5 px-6 rounded-lg font-bold text-sm transition-all duration-300 border-2 border-secondary"
+                className="text-background text-center bg-secondary hover:bg-white hover:text-background shadow-lg py-2.5 px-6 rounded-lg font-bold text-sm transition-all duration-300 border-2 border-secondary"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -234,7 +234,7 @@ export default function Header() {
               <div className="pt-4">
                 <Link
                   href={CLIENT_AREA_URL}
-                  className="block w-full text-center text-primary bg-secondary hover:bg-secondary/90 py-3 px-6 rounded-lg font-bold text-base transition-colors"
+                  className="block w-full text-center text-background bg-secondary hover:bg-secondary/90 py-3 px-6 rounded-lg font-bold text-base transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                   target="_blank"
                   rel="noopener noreferrer"

@@ -7,6 +7,8 @@ import {
   FaFileInvoiceDollar,
   FaBuilding,
 } from "react-icons/fa";
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 import ScrollReveal from "./ScrollReveal";
 import { m } from "framer-motion";
 import { services as servicesData } from "@/data/site";
@@ -39,11 +41,15 @@ export default function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <ScrollReveal key={index} delay={index * 0.1} width="100%">
+              <Link
+                href={`/servicos/${service.slug}/`}
+                className="block h-full rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+              >
               <m.div
                 whileHover={{ y: -10 }}
-                className="bg-white rounded-2xl shadow-lg p-8 h-full border border-gray-100 hover:shadow-2xl hover:shadow-secondary/5 hover:border-secondary/20 transition-all duration-300 group"
+                className="bg-white rounded-2xl shadow-lg p-8 h-full border border-gray-100 hover:shadow-2xl hover:shadow-secondary/5 hover:border-secondary/20 transition-all duration-300 group flex flex-col"
               >
-                <div className="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary mb-6 group-hover:bg-secondary group-hover:text-white transition-colors duration-300 shrink-0">
+                <div className="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary mb-6 group-hover:bg-secondary group-hover:text-background transition-colors duration-300 shrink-0">
                   <service.icon className="w-7 h-7" />
                 </div>
                 <h3 className="text-xl font-bold text-light mb-4 group-hover:text-secondary transition-colors">
@@ -52,7 +58,13 @@ export default function Services() {
                 <p className="text-gray-600 leading-relaxed">
                   {service.description}
                 </p>
+                <span className="mt-auto pt-6 inline-flex items-center gap-2 text-light font-semibold group-hover:underline">
+                  Saiba mais
+                  <span className="sr-only"> sobre {service.title}</span>
+                  <FaArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </span>
               </m.div>
+              </Link>
             </ScrollReveal>
           ))}
         </div>

@@ -44,9 +44,14 @@ All components are client components (`"use client"`) for interactivity, located
 4. `Services.tsx` - 5 service cards (Contabilidade, Consultoria, Folha, Fiscal, Legalização)
 5. `Plans.tsx` - Pricing table with 4 tiers (MEI, Simples, Lucro Presumido, Construção Civil)
 6. `Partners.tsx` - Partner logos section
-7. `Contact.tsx` - Contact form powered by EmailJS
-8. `Footer.tsx` - Footer navigation and social links
-9. `WhatsAppButton.tsx` - Floating WhatsApp CTA button
+7. `FAQ.tsx` - Perguntas frequentes (`faq` em `src/data/site.ts`; também gera o JSON-LD FAQPage da home)
+8. `Contact.tsx` - Contact form powered by EmailJS
+9. `Footer.tsx` - Footer navigation and social links
+10. `WhatsAppButton.tsx` - Floating WhatsApp CTA button
+
+**Service pages:** `src/app/servicos/[slug]/page.tsx` gera uma página estática por item de `services` (slug, textos, "para quem é", avulsos relacionados), com BreadcrumbList e Service em JSON-LD; CTAs em `ServiceCTA.tsx` (`whatsapp_click`) e o formulário `Contact.tsx` (`generate_lead`). Os cartões da home linkam para elas.
+
+**Contraste:** sobre o dourado (`bg-secondary`) o texto/ícone é sempre azul-escuro (`text-background`), nunca branco.
 
 **Utilities:**
 - `src/utils/smoothScroll.ts` - Custom smooth scroll with 80px header offset

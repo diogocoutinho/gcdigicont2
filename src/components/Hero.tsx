@@ -5,6 +5,7 @@ import { smoothScroll } from "@/utils/smoothScroll";
 
 import { m } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
+import { HERO_INTRO } from "@/data/site";
 
 export default function Hero() {
   const handleScroll = (
@@ -52,6 +53,11 @@ export default function Hero() {
                   buscam crescimento, eficiência e tranquilidade fiscal.
                 </p>
               </ScrollReveal>
+
+              {/* Resumo: o que é, para quem e onde atende (src/data/site.ts). */}
+              <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto sm:mx-0 leading-relaxed border-l-0 sm:border-l-2 sm:border-secondary sm:pl-4">
+                {HERO_INTRO}
+              </p>
             </div>
 
             <ScrollReveal delay={0.4} width="100%">
@@ -61,7 +67,7 @@ export default function Hero() {
                   onClick={(e) => handleScroll(e, "contato")}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-secondary text-primary px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-secondary/30 transition-all text-center"
+                  className="bg-secondary text-background px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-secondary/30 transition-all text-center"
                 >
                   Fale Conosco
                 </m.a>
